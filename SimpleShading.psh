@@ -1,0 +1,102 @@
+#include "ShaderConstant.hlsl"
+#include "BRDF.hlsl"
+
+
+
+
+
+Define_SimplePBRMaterial_HLSL(0);
+Define_SimpleLight_HLSL(1);
+static const float3 f0 = calcF0FromIOR(ior)*(1.0-metalness)+color*metalness;
+
+Texture2D shadowMap: register(t0);
+SamplerState shadowMapSampler: register(s0);
+	
+
+
+
+
+struct PSInput
+{
+	float4 position:   SV_POSITION;
+	float3 positionW:  TEXCOORD1;
+	float3 normal:     TEXCOORD2;
+	float4 lpPosition: TEXCOORD3;
+};
+
+
+
+
+
+inline float3 calcBRDF(float3 p, float3 n, float3 cp, float3 ldir, float3 objectColor, float objectRoughness, float3 objectF0, float LdotN, float satuLdotN)
+{
+	float3 vdir = normalize(cp-p);
+	float3 h = normalize(vdir-ldir);
+
+	float VdotN = dot(vdir, n);
+	float satuLdotH = saturate(dot(-ldir, h));
+	float satuVdotN = saturate(VdotN);
+	float satuVdotH = saturate(dot(vdir, h));
+	float satuHdotN = saturate(dot(h, n));
+	
+	float alpha = objectRoughness*objectRoughness;
+	float alphaSquared = alpha*alpha;
+
+	float D = calcGGXDistribution(satuHdotN, alphaSquared);
+	float G = calcSmithJointMaskingShadowing(satuLdotN, satuVdotN, alphaSquared);
+	float F = calcSchlickApproximation(objectF0, satuVdotH);
+
+	float3 diffuseBRDF = calcNormalizedDisneyDiffuseBRDF(objectColor, satuLdotH, satuLdotN, satuVdotN, objectRoughness);
+	float3 specularBRDF = calcTorranceSparrowBRDF(objectColor, D, G, F, abs(LdotN), abs(VdotN));
+
+	return diffuseBRDF+specularBRDF;
+}
+inline float3 calcRadiance(float3 p, float3 n, float3 objectColor, float objectRoughness, float3 objectF0, float3 ldir, float3 lightColor, float lightAttenuation, float3 cp)
+{
+	float LdotN = dot(-ldir, n);
+	float satuLdotN = saturate(LdotN);
+
+	return calcBRDF(p, n, cp, ldir, objectColor, objectRoughness, objectF0, LdotN, satuLdotN)*lightColor*lightAttenuation*satuLdotN; 
+}
+
+
+
+
+
+inline float3 calcDirectionalLight(float3 p, float3 n, float3 objectColor, float objectRoughness, float3 objectF0, float3 ldir, float3 lightColor, float3 cp)
+{
+	return calcRadiance(p, n, objectColor, objectRoughness, objectF0, ldir, lightColor, 1.0, cp);
+}
+inline float3 calcPointLight(float3 p, float3 n, float3 objectColor, float objectRoughness, float3 objectF0, float3 lightPosition, float3 lightColor, float3 Kclq, float3 cp)
+{
+	float3 l2p = p-lightPosition;
+	float d = length(l2p);
+
+	return calcRadiance(p, n, objectColor, objectRoughness, objectF0, l2p/d, lightColor, 1.0/(Kclq.x+Kclq.y*d+Kclq.z*d*d), cp);
+}
+
+
+
+
+
+float4 ps_main(PSInput input) : SV_TARGET
+{
+	float3 n = normalize(input.normal);
+
+	float3 outColor = calcDirectionalLight(input.positionW.xyz, n, color, roughness, f0, directionalLight.direction, directionalLight.color, cameraPosition);
+	for (int i = 0; i < 1; ++i)
+	{
+		SimplePointLight pointLight = pointLights[i];
+		outColor += calcPointLight(input.positionW.xyz, n, color, roughness, f0, pointLight.position, pointLight.color, pointLight.Kclq, cameraPosition);
+	}
+
+	float2 shadowUV = float2(input.lpPosition.x/input.lpPosition.w*0.5+0.5, -input.lpPosition.y/input.lpPosition.w*0.5+0.5);
+	float lpDepth = shadowMap.Sample(shadowMapSampler, shadowUV).r;
+	float depth = input.lpPosition.z/input.lpPosition.w;
+	if (lpDepth+0.005 < depth)
+	{
+		outColor *= 0.5;
+	}
+
+	return float4(outColor , 1.0);
+}

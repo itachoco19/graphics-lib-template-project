@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{0ce682f2-c016-4216-af3c-2f9275b7e9e4}</ProjectGuid>
+    <RootNamespace>GraphicsLib_Template</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>GraphicsLib-Template</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(GRAPHICS_LIB)\inc\open;$(GRAPHICS_LIB)\inc</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DisableSpecificWarnings>4250;4003</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>dxguid.lib;d3dcompiler.lib;d3d11.lib;$(GRAPHICS_LIB)\lib\x86\Debug\*.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(GRAPHICS_LIB)\inc\open;$(GRAPHICS_LIB)\inc</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DisableSpecificWarnings>4250;4003</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>dxguid.lib;d3dcompiler.lib;d3d11.lib;$(GRAPHICS_LIB)\lib\x86\Release\*.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(GRAPHICS_LIB)\inc\open;$(GRAPHICS_LIB)\inc</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DisableSpecificWarnings>4250;4003</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>dxguid.lib;d3dcompiler.lib;d3d11.lib;$(GRAPHICS_LIB)\lib\x64\Debug\*.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(GRAPHICS_LIB)\inc\open;$(GRAPHICS_LIB)\inc</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DisableSpecificWarnings>4250;4003</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>dxguid.lib;d3dcompiler.lib;d3d11.lib;$(GRAPHICS_LIB)\lib\x64\Release\*.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="FullscreenDepthTextureOrthographicRenderPipeline.cpp" />
+    <ClCompile Include="FullscreenDepthTexturePerspectiveRenderPipeine.cpp" />
+    <ClCompile Include="FullscreenDepthTextureRenderPipeline.cpp" />
+    <ClCompile Include="FullscreenTextureRenderPipeline.cpp" />
+    <ClCompile Include="ImGuiGraphicsLibDefaultInspector.cpp" />
+    <ClCompile Include="ImGuiCameraInspector.cpp" />
+    <ClCompile Include="ConstantWithImGuiComponents.cpp" />
+    <ClCompile Include="BoxWithImGuiComponents.cpp" />
+    <ClCompile Include="DefferedRenderingRenderPipeline.cpp" />
+    <ClCompile Include="ImGuiCameraControllerInspector.cpp" />
+    <ClCompile Include="ImGuiDrawableObjectInspector.cpp" />
+    <ClCompile Include="ForwardRenderingRenderPipeline.cpp" />
+    <ClCompile Include="ImGuiCameraJumpButton.cpp" />
+    <ClCompile Include="ImGuiSceneLightSearchBar.cpp" />
+    <ClCompile Include="ImGuiDrawableObjectMaterialInspector.cpp" />
+    <ClCompile Include="CameraController.cpp" />
+    <ClCompile Include="ObjectFreeLookControl.cpp" />
+    <ClCompile Include="ObjectWASDControl.cpp" />
+    <ClCompile Include="PlaneWithImGuiComponents.cpp" />
+    <ClCompile Include="ImGuiProjectionInspector.cpp" />
+    <ClCompile Include="RederPipelineSRTWithImGuiComponents.cpp" />
+    <ClCompile Include="RenderPipelineMRTWithImGuiComponents.cpp" />
+    <ClCompile Include="RenderPipelineWithImGuiComponents.cpp" />
+    <ClCompile Include="ImGuiSceneInspector.cpp" />
+    <ClCompile Include="ImGuiSceneDrawableObjectInspector.cpp" />
+    <ClCompile Include="ShapeWithImGuiComponents.cpp" />
+    <ClCompile Include="SimpleDirectionalLight.cpp" />
+    <ClCompile Include="SimplePBRMaterialConstant.cpp" />
+    <ClCompile Include="SimplePointLight.cpp" />
+    <ClCompile Include="SampleShadingRenderPipeline.cpp" />
+    <ClCompile Include="SphereWithImGuiComponents.cpp" />
+    <ClCompile Include="ImGuiTransformInspector.cpp" />
+    <ClCompile Include="ObjectLookAtControl.cpp" />
+    <ClCompile Include="SampleRenderPipeline.cpp" />
+    <ClCompile Include="DepthPass.cpp" />
+    <ClCompile Include="ZPrePassForwardRendering.cpp" />
+    <ClCompile Include="ZPrePassSampleRenderPipeline.cpp" />
+    <ClCompile Include="DepthRenderPipeline.cpp" />
+    <ClCompile Include="FullscreenQuad.cpp" />
+    <ClCompile Include="FullscreenQuadRenderPipeline.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BoxWithImGuiComponents.hpp" />
+    <ClInclude Include="FullscreenDepthTexturePerspectiveRenderPipeline.hpp" />
+    <ClInclude Include="FullscreenDepthTextureOrthographicRenderPipeline.hpp" />
+    <ClInclude Include="FullscreenDepthTextureRenderPipeline.hpp" />
+    <ClInclude Include="ImGuiGraphicsLibDefaultInspector.hpp" />
+    <ClInclude Include="ObjectControllingMethod.hpp" />
+    <ClInclude Include="CameraController.hpp" />
+    <ClInclude Include="ObjectFreeLookControl.hpp" />
+    <ClInclude Include="ObjectLookAtControl.hpp" />
+    <ClInclude Include="ImGuiCameraInspector.hpp" />
+    <ClInclude Include="ConstantWithImGuiComponents.hpp" />
+    <ClInclude Include="DefferedRenderingRenderPipeline.hpp" />
+    <ClInclude Include="ImGuiDrawableObjectInspector.hpp" />
+    <ClInclude Include="ForwardRenderingRenderPipeline.hpp" />
+    <ClInclude Include="IImGuiComponentsHolder.hpp" />
+    <ClInclude Include="ImGuiCameraJumpButton.hpp" />
+    <ClInclude Include="ImGuiCameraControllerInspector.hpp" />
+    <ClInclude Include="ImGuiSceneLightInspector.hpp" />
+    <ClInclude Include="ImGuiDrawableObjectMaterialInspector.hpp" />
+    <ClInclude Include="ObjectWASDControl.hpp" />
+    <ClInclude Include="PlaneWithImGuiComponents.hpp" />
+    <ClInclude Include="ImGuiProjectionInspector.hpp" />
+    <ClInclude Include="RenderPipelineSRTWithImGuiComponents.hpp" />
+    <ClInclude Include="RenderPipelineMRTWithImGuiComponents.hpp" />
+    <ClInclude Include="RenderPipelineWithImGuiComponents.hpp" />
+    <ClInclude Include="ImGuiSceneInspector.hpp" />
+    <ClInclude Include="ImGuiSceneDrawableObjectInspector.hpp" />
+    <ClInclude Include="ShapeWithImGuiComponents.hpp" />
+    <ClInclude Include="SimpleDirectionalLight.hpp" />
+    <ClInclude Include="SimplePBRMaterialConstant.hpp" />
+    <ClInclude Include="SimplePointLight.hpp" />
+    <ClInclude Include="SampleShadingRenderPipeline.hpp" />
+    <ClInclude Include="SphereWithImGuiComponents.hpp" />
+    <ClInclude Include="ImGuiTransformInspector.hpp" />
+    <ClInclude Include="SampleRenderPipeline.hpp" />
+    <ClInclude Include="DepthPass.hpp" />
+    <ClInclude Include="ZPrePassSampleRenderPipeline.hpp" />
+    <ClInclude Include="DepthRenderPipeline.hpp" />
+    <ClInclude Include="FullscreenQuad.hpp" />
+    <ClInclude Include="DrawableObjectCreator.hpp" />
+    <ClInclude Include="FullscreenQuadRenderPipeline.hpp" />
+    <ClInclude Include="ZPrePassForwardRendering.hpp" />
+    <ClInclude Include="FullscreenTextureRenderPipeline.hpp" />
+    <ClInclude Include="ShaderConstant.h" />
+    <ClInclude Include="ShaderConstant.hpp" />
+    <ClInclude Include="VertexShaderInput.h" />
+    <ClInclude Include="VertexShaderInput.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ShaderConstant.hlsl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="VertexShaderInput.hlsl">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FullscreenQuad.vsh">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DepthPass.vsh">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Position3Normal3InOut.vsh">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="SimpleShading.psh">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BRDF.hlsl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="Constant.hlsl">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FullscreenTexture.psh">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FullscreenDepthTexturePerspective.psh">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FullscreenDepthTextureOrthographic.psh">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

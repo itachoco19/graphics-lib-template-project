@@ -1,0 +1,539 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="VertexShaderInput.h">
+      <Filter>HeaderFiles\ShaderConstant\HLSL\ShaderConstantDefinition</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderConstant.h">
+      <Filter>HeaderFiles\ShaderConstant\HLSL\ShaderConstantDefinition</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexShaderInput.hpp">
+      <Filter>HeaderFiles\ShaderConstant\HLSL\C++SideConstantHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderConstant.hpp">
+      <Filter>HeaderFiles\ShaderConstant\HLSL\C++SideConstantHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="FullscreenQuad.hpp">
+      <Filter>HeaderFiles\DrawableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereWithImGuiComponents.hpp">
+      <Filter>HeaderFiles\ImGui\ComponentsHolder\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeWithImGuiComponents.hpp">
+      <Filter>HeaderFiles\ImGui\ComponentsHolder\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneWithImGuiComponents.hpp">
+      <Filter>HeaderFiles\ImGui\ComponentsHolder\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxWithImGuiComponents.hpp">
+      <Filter>HeaderFiles\ImGui\ComponentsHolder\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantWithImGuiComponents.hpp">
+      <Filter>HeaderFiles\ImGui\ComponentsHolder\Constant</Filter>
+    </ClInclude>
+    <ClInclude Include="IImGuiComponentsHolder.hpp">
+      <Filter>HeaderFiles\ImGui\ComponentsHolder\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderPipelineWithImGuiComponents.hpp">
+      <Filter>HeaderFiles\ImGui\ComponentsHolder\RenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderPipelineMRTWithImGuiComponents.hpp">
+      <Filter>HeaderFiles\ImGui\ComponentsHolder\RenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiCameraInspector.hpp">
+      <Filter>HeaderFiles\ImGui\Components\SceneInspector</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiProjectionInspector.hpp">
+      <Filter>HeaderFiles\ImGui\Components\SceneInspector</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiSceneInspector.hpp">
+      <Filter>HeaderFiles\ImGui\Components\SceneInspector</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiSceneLightInspector.hpp">
+      <Filter>HeaderFiles\ImGui\Components\SceneInspector</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiSceneDrawableObjectInspector.hpp">
+      <Filter>HeaderFiles\ImGui\Components\SceneInspector</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiTransformInspector.hpp">
+      <Filter>HeaderFiles\ImGui\Components\SceneInspector</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiDrawableObjectInspector.hpp">
+      <Filter>HeaderFiles\ImGui\Components\SceneInspector</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiDrawableObjectMaterialInspector.hpp">
+      <Filter>HeaderFiles\ImGui\Components\SceneInspector</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiCameraJumpButton.hpp">
+      <Filter>HeaderFiles\ImGui\Components\SceneInspector</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiCameraControllerInspector.hpp">
+      <Filter>HeaderFiles\ImGui\Components\SceneInspector</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFreeLookControl.hpp">
+      <Filter>HeaderFiles\ObjectController\Components\ObjectControl</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectLookAtControl.hpp">
+      <Filter>HeaderFiles\ObjectController\Components\ObjectControl</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectWASDControl.hpp">
+      <Filter>HeaderFiles\ObjectController\Components\ObjectControl</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraController.hpp">
+      <Filter>HeaderFiles\ObjectController\CameraController</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectControllingMethod.hpp">
+      <Filter>HeaderFiles\ObjectController\Components\ObjectControl\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderPipelineSRTWithImGuiComponents.hpp">
+      <Filter>HeaderFiles\ImGui\ComponentsHolder\RenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="ZPrePassForwardRendering.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Base\ZPrePass</Filter>
+    </ClInclude>
+    <ClInclude Include="DefferedRenderingRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardRenderingRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Base\ForwardRenderingRenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="FullscreenQuadRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Base\FullscreenQuadRenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="SimplePBRMaterialConstant.hpp">
+      <Filter>HeaderFiles\DrawableObject\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="DepthRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Base\DepthRenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="DepthPass.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Base\DepthRenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="FullscreenTextureRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Base\FullscreenTextureRenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawableObjectCreator.hpp">
+      <Filter>HeaderFiles\DrawableObject\Creator</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiGraphicsLibDefaultInspector.hpp">
+      <Filter>HeaderFiles\ImGui\Components\GraphicsLibDefaultInspector</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleDirectionalLight.hpp">
+      <Filter>HeaderFiles\Light\DirectionalLight</Filter>
+    </ClInclude>
+    <ClInclude Include="SimplePointLight.hpp">
+      <Filter>HeaderFiles\Light\PointLight</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleShadingRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Sample\ShadingRenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="ZPrePassSampleRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="FullscreenDepthTexturePerspectiveRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Base\FullscreenDepthTextureRenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="FullscreenDepthTextureOrthographicRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Base\FullscreenDepthTextureRenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="FullscreenDepthTextureRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Base\FullscreenDepthTextureRenderPipeline</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="HeaderFiles">
+      <UniqueIdentifier>{5bfa6675-86c2-462d-9f82-e4542b292e73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles">
+      <UniqueIdentifier>{d78db233-d221-4d5f-a1b4-0dfe29609b82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\ShaderConstant">
+      <UniqueIdentifier>{71070e4c-b7c6-4fb9-b705-a7cf12fbc264}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\ShaderConstant\HLSL">
+      <UniqueIdentifier>{031c2fe2-2e86-400c-b8d8-816697d3996e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\ShaderConstant\HLSL\ShaderConstantDefinition">
+      <UniqueIdentifier>{493804bc-ed80-49ce-82f8-3060bc50f6dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\ShaderConstant\HLSL\HLSLSideConstantHeader">
+      <UniqueIdentifier>{e6ede905-501f-462c-8448-de8ec52abf54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\ShaderConstant\HLSL\C++SideConstantHeader">
+      <UniqueIdentifier>{59951b90-7e76-4aa0-a625-56a8082de7d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles">
+      <UniqueIdentifier>{4fb46e0c-c677-4ec9-8354-a166935ac155}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles\HLSL">
+      <UniqueIdentifier>{3a375b95-fdf0-48da-944a-9bda924d0ab7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline">
+      <UniqueIdentifier>{de1ab890-a9c0-49c5-ac88-4c5276b03df4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline">
+      <UniqueIdentifier>{c91c87cd-3d59-4746-b48f-679924d6a43d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\DrawableObject">
+      <UniqueIdentifier>{7c89ceac-0e2b-43b0-a486-4f02b6e8d739}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\DrawableObject">
+      <UniqueIdentifier>{75406d11-dcad-47fe-8159-cb6339d9f49a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\Light">
+      <UniqueIdentifier>{7a915d67-b0a8-4b82-9a86-f787248c567e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\ImGui">
+      <UniqueIdentifier>{d6981a70-2cc7-49ff-a92b-eac1ae809c47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\ImGui\Components">
+      <UniqueIdentifier>{4957a626-ea83-4222-9cc3-33fb1b8da689}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\ImGui">
+      <UniqueIdentifier>{aa2a14aa-9d77-43e1-9ce8-61875c76616f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\ImGui\Components">
+      <UniqueIdentifier>{847dea99-db03-48c0-8314-3b954fdbf57c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\Light">
+      <UniqueIdentifier>{4ce9e1dc-d65b-453c-a6f3-418f37ee31cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\ImGui\ComponentsHolder">
+      <UniqueIdentifier>{6afc5d38-bfcd-4138-9088-db02b67e1291}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\ImGui\ComponentsHolder\Shape">
+      <UniqueIdentifier>{1e91876e-1702-4e08-aa2a-ab157454fac6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\ImGui\ComponentsHolder\Constant">
+      <UniqueIdentifier>{59094ba0-49a8-485b-b0fe-8788f923ee9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\ImGui\ComponentsHolder\Base">
+      <UniqueIdentifier>{f4f098c1-54bf-4f69-bf4c-29d9470363d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\ImGui\ComponentsHolder\RenderPipeline">
+      <UniqueIdentifier>{7134d96d-3be9-4c6c-9e9c-ce8ca7d7e08c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\ImGui\ComponentsHolder">
+      <UniqueIdentifier>{abb97689-2578-43d5-a720-55f866aeb1e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\ImGui\ComponentsHolder\Constant">
+      <UniqueIdentifier>{5dc334d7-8f0b-4069-84c9-5fdb468c6953}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\ImGui\ComponentsHolder\RenderPipeline">
+      <UniqueIdentifier>{fb47276d-d2c8-48a6-b367-2908a91ac421}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\ImGui\ComponentsHolder\Shape">
+      <UniqueIdentifier>{0bd45529-f2b1-4ccd-8ef6-6300ff0356be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\ImGui\Components\SceneInspector">
+      <UniqueIdentifier>{7a18150f-3e36-4160-94f1-2aa33f7c081e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline\Base">
+      <UniqueIdentifier>{d49dae6b-5435-426e-9db7-68178544d99b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline\Base\ForwardRenderingRenderPipeline">
+      <UniqueIdentifier>{dccf0f98-cb15-4cb6-8811-f7c1a4efb047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline">
+      <UniqueIdentifier>{98b4007c-2306-4f89-bfa4-d08d321cfb52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline\Base\ZPrePass">
+      <UniqueIdentifier>{dbc58f18-b749-4173-ad4e-f5c22229390f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Base">
+      <UniqueIdentifier>{c19b82c8-3499-48c9-8225-43fe087187a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Base\ZPrePassForwardRendering">
+      <UniqueIdentifier>{f4639237-87e0-4092-b60a-089c17761fd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline">
+      <UniqueIdentifier>{dc5a1ba3-cf16-4c45-a90f-91228225ddfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Base\ForwardRenderingRenderPipeline">
+      <UniqueIdentifier>{14717fbc-0c42-43b0-82a5-31ced2df5348}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Base\FullscreenQuadRenderPipeline">
+      <UniqueIdentifier>{660a78ee-d584-49fd-acc4-419fc7505df9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline\Base\FullscreenQuadRenderPipeline">
+      <UniqueIdentifier>{4ef3f5c0-5160-4385-bdfd-4ebe8064ac7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles\HLSL\Reuse">
+      <UniqueIdentifier>{93ecb2af-7a2b-41e4-a557-c7b2859dd257}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles\HLSL\VertexShader">
+      <UniqueIdentifier>{0f758a1b-8cd5-4768-8029-795c78ae3596}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\DrawableObject\Material">
+      <UniqueIdentifier>{9e7820f3-346b-457e-a727-e5afc66e1482}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\DrawableObject\Material">
+      <UniqueIdentifier>{db274891-23d3-4dbb-b0e8-a45c7d24a645}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline\Base\DepthRenderPipeline">
+      <UniqueIdentifier>{5b1a4468-020e-46df-ac69-730aba5d836e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Base\DepthRenderPipeline">
+      <UniqueIdentifier>{5fc1d4b5-a133-43a3-ac16-6a15c3f76186}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline\Base\FullscreenTextureRenderPipeline">
+      <UniqueIdentifier>{2a1a2593-5df5-4921-98b3-28ca07ab4d85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline\Base\FullscreenDepthTextureRenderPipeline">
+      <UniqueIdentifier>{4642878e-9a7e-43cc-88cd-f98dc973cf6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Base\FullscreenTextureRenderPipeline">
+      <UniqueIdentifier>{330fd925-6905-42e8-b9c4-cedf434be3c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Base\FullscreenDepthTextureRenderPipeline">
+      <UniqueIdentifier>{8ec0416b-5c4e-4ce8-b301-e723ca8471ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\DrawableObject\Creator">
+      <UniqueIdentifier>{1eb37d3c-52d5-4067-bd2d-69a398421883}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\ImGui\Components\SceneInspector">
+      <UniqueIdentifier>{b45a1aad-a78e-4c95-ae4c-3ab597200a71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\ImGui\Components\GraphicsLibDefaultInspector">
+      <UniqueIdentifier>{249f09e5-8253-444b-a321-008d0993fc8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\ImGui\Components\GraphicsLibDefaultInspector">
+      <UniqueIdentifier>{c6424b37-857f-455a-a69c-4401e67c3523}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\ObjectController">
+      <UniqueIdentifier>{08ff1064-cc5c-4333-9ea9-02fc6b0a267d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\ObjectController\CameraController">
+      <UniqueIdentifier>{645d9ade-6061-47aa-96c8-0573c04b72de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\ObjectController\ObjectControl">
+      <UniqueIdentifier>{81491439-b338-44d3-9ec4-5b544435262f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\ObjectController">
+      <UniqueIdentifier>{52011d34-8b0a-4c36-b228-74c25d29fec3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\ObjectController\CameraController">
+      <UniqueIdentifier>{6f84806f-5c96-4e87-ab08-d2d59143aa55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles\HLSL\Reuse\Constant">
+      <UniqueIdentifier>{c3b8db38-46ac-4c08-aa7c-cbfce641d052}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles\HLSL\Reuse\Functions">
+      <UniqueIdentifier>{8d95276a-02a5-4f94-b8f6-1f0ca374da8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\ObjectController\Components">
+      <UniqueIdentifier>{a9e3da7b-aab9-4704-a51f-c2cf626c5800}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\ObjectController\Components\ObjectControl">
+      <UniqueIdentifier>{0fc52753-ef45-4c18-907e-8c4f33c7f405}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\ObjectController\Components\ObjectControl\Components">
+      <UniqueIdentifier>{09db7527-06c9-48cf-9063-03f395efdb62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\Light\DirectionalLight">
+      <UniqueIdentifier>{37265036-a317-4841-b4bd-22c8821cde94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\Light\PointLight">
+      <UniqueIdentifier>{f2a4f390-7c63-4c37-bee3-4b5d3062b56e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Sample">
+      <UniqueIdentifier>{2175930c-7c86-4c9f-bb49-f40a2403e456}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Sample\SampleShadingRenderPipeline">
+      <UniqueIdentifier>{0710561d-058a-4673-b1fc-6d8422ee3294}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline\Sample">
+      <UniqueIdentifier>{a2756566-73a7-4d3d-a7d5-51eb298fc340}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline\Sample\ShadingRenderPipeline">
+      <UniqueIdentifier>{a885205a-dff4-4c96-adf7-392d04f63307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\Light\DirectionalLight">
+      <UniqueIdentifier>{f572ea2e-d614-4b51-99c6-4f6160b17401}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\Light\PointLight">
+      <UniqueIdentifier>{cf447a77-3f0c-40f6-8cdd-e3277f32ef6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles\HLSL\PixelShader">
+      <UniqueIdentifier>{9fd3c012-977e-4ff4-8789-dda473c6a254}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles\HLSL\PixelShader\Shading">
+      <UniqueIdentifier>{49bb3877-8360-4bf8-b789-bf0492d5ea1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles\HLSL\PixelShader\FullscreenTexture">
+      <UniqueIdentifier>{5db136e4-3eb9-495f-b0cc-78ceb8b902d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles\HLSL\PixelShader\FullscreenDepthTexture">
+      <UniqueIdentifier>{d327d258-1e45-48bb-8c66-aae0e3fa9955}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles\HLSL\VertexShader\FullscreenQuad">
+      <UniqueIdentifier>{24336ccd-a1c7-42fb-b622-5042afb2f320}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles\HLSL\VertexShader\DepthPass">
+      <UniqueIdentifier>{373232f3-0676-43cb-8091-7d453b63fdc4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FullscreenQuad.cpp">
+      <Filter>SourceFiles\DrawableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderPipelineWithImGuiComponents.cpp">
+      <Filter>SourceFiles\ImGui\ComponentsHolder\RenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderPipelineMRTWithImGuiComponents.cpp">
+      <Filter>SourceFiles\ImGui\ComponentsHolder\RenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="RederPipelineSRTWithImGuiComponents.cpp">
+      <Filter>SourceFiles\ImGui\ComponentsHolder\RenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneWithImGuiComponents.cpp">
+      <Filter>SourceFiles\ImGui\ComponentsHolder\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeWithImGuiComponents.cpp">
+      <Filter>SourceFiles\ImGui\ComponentsHolder\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxWithImGuiComponents.cpp">
+      <Filter>SourceFiles\ImGui\ComponentsHolder\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantWithImGuiComponents.cpp">
+      <Filter>SourceFiles\ImGui\ComponentsHolder\Constant</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereWithImGuiComponents.cpp">
+      <Filter>SourceFiles\ImGui\ComponentsHolder\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiCameraInspector.cpp">
+      <Filter>SourceFiles\ImGui\Components\SceneInspector</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiProjectionInspector.cpp">
+      <Filter>SourceFiles\ImGui\Components\SceneInspector</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiSceneInspector.cpp">
+      <Filter>SourceFiles\ImGui\Components\SceneInspector</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiSceneDrawableObjectInspector.cpp">
+      <Filter>SourceFiles\ImGui\Components\SceneInspector</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiSceneLightSearchBar.cpp">
+      <Filter>SourceFiles\ImGui\Components\SceneInspector</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiDrawableObjectMaterialInspector.cpp">
+      <Filter>SourceFiles\ImGui\Components\SceneInspector</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiDrawableObjectInspector.cpp">
+      <Filter>SourceFiles\ImGui\Components\SceneInspector</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiTransformInspector.cpp">
+      <Filter>SourceFiles\ImGui\Components\SceneInspector</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiCameraJumpButton.cpp">
+      <Filter>SourceFiles\ImGui\Components\SceneInspector</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiCameraControllerInspector.cpp">
+      <Filter>SourceFiles\ImGui\Components\SceneInspector</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFreeLookControl.cpp">
+      <Filter>SourceFiles\ObjectController\ObjectControl</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectLookAtControl.cpp">
+      <Filter>SourceFiles\ObjectController\ObjectControl</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectWASDControl.cpp">
+      <Filter>SourceFiles\ObjectController\ObjectControl</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraController.cpp">
+      <Filter>SourceFiles\ObjectController\CameraController</Filter>
+    </ClCompile>
+    <ClCompile Include="ForwardRenderingRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Base\ForwardRenderingRenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="DefferedRenderingRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="ZPrePassForwardRendering.cpp">
+      <Filter>SourceFiles\RenderPipeline\Base\ZPrePassForwardRendering</Filter>
+    </ClCompile>
+    <ClCompile Include="FullscreenQuadRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Base\FullscreenQuadRenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>SourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="SimplePBRMaterialConstant.cpp">
+      <Filter>SourceFiles\DrawableObject\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="DepthPass.cpp">
+      <Filter>SourceFiles\RenderPipeline\Base\DepthRenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="DepthRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Base\DepthRenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="FullscreenTextureRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Base\FullscreenTextureRenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiGraphicsLibDefaultInspector.cpp">
+      <Filter>SourceFiles\ImGui\Components\GraphicsLibDefaultInspector</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleShadingRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Sample\SampleShadingRenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="ZPrePassSampleRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleDirectionalLight.cpp">
+      <Filter>SourceFiles\Light\DirectionalLight</Filter>
+    </ClCompile>
+    <ClCompile Include="SimplePointLight.cpp">
+      <Filter>SourceFiles\Light\PointLight</Filter>
+    </ClCompile>
+    <ClCompile Include="FullscreenDepthTextureOrthographicRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Base\FullscreenDepthTextureRenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="FullscreenDepthTexturePerspectiveRenderPipeine.cpp">
+      <Filter>SourceFiles\RenderPipeline\Base\FullscreenDepthTextureRenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="FullscreenDepthTextureRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Base\FullscreenDepthTextureRenderPipeline</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ShaderConstant.hlsl">
+      <Filter>HeaderFiles\ShaderConstant\HLSL\HLSLSideConstantHeader</Filter>
+    </None>
+    <None Include="VertexShaderInput.hlsl">
+      <Filter>HeaderFiles\ShaderConstant\HLSL\HLSLSideConstantHeader</Filter>
+    </None>
+    <None Include="Constant.hlsl">
+      <Filter>ShaderFiles\HLSL\Reuse\Constant</Filter>
+    </None>
+    <None Include="FullscreenQuad.vsh">
+      <Filter>ShaderFiles\HLSL\VertexShader\FullscreenQuad</Filter>
+    </None>
+    <None Include="Position3Normal3InOut.vsh">
+      <Filter>ShaderFiles\HLSL\VertexShader</Filter>
+    </None>
+    <None Include="DepthPass.vsh">
+      <Filter>ShaderFiles\HLSL\VertexShader\DepthPass</Filter>
+    </None>
+    <None Include="FullscreenTexture.psh">
+      <Filter>ShaderFiles\HLSL\PixelShader\FullscreenTexture</Filter>
+    </None>
+    <None Include="SimpleShading.psh">
+      <Filter>ShaderFiles\HLSL\PixelShader\Shading</Filter>
+    </None>
+    <None Include="BRDF.hlsl">
+      <Filter>ShaderFiles\HLSL\Reuse\Functions</Filter>
+    </None>
+    <None Include="FullscreenDepthTexturePerspective.psh">
+      <Filter>ShaderFiles\HLSL\PixelShader\FullscreenDepthTexture</Filter>
+    </None>
+    <None Include="FullscreenDepthTextureOrthographic.psh">
+      <Filter>ShaderFiles\HLSL\PixelShader\FullscreenDepthTexture</Filter>
+    </None>
+  </ItemGroup>
+</Project>

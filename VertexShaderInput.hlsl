@@ -1,0 +1,12 @@
+#ifndef VERTEX_SHADER_INPUT_HLSL
+#define VERTEX_SHADER_INPUT_HLSL
+
+#include "VertexShaderInput.h"
+
+
+
+
+
+DEFINE_VS_INPUT(:POSITION, :TEXCOORD, :NORMAL);
+
+#endif
