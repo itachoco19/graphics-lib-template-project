@@ -142,6 +142,12 @@
     <ClInclude Include="FullscreenDepthTextureRenderPipeline.hpp">
       <Filter>HeaderFiles\RenderPipeline\Base\FullscreenDepthTextureRenderPipeline</Filter>
     </ClInclude>
+    <ClInclude Include="GeometryRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline\GeometryRenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryPass.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline\GeometryRenderPipeline</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="HeaderFiles">
@@ -375,6 +381,12 @@
     <Filter Include="ShaderFiles\HLSL\VertexShader\DepthPass">
       <UniqueIdentifier>{373232f3-0676-43cb-8091-7d453b63fdc4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline\GeometryPass">
+      <UniqueIdentifier>{220ab416-12f3-416d-bbd9-900ebb4bb532}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline\GeometryRenderPipeline">
+      <UniqueIdentifier>{72932901-cd3f-4658-86d7-5066dc6c02c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FullscreenQuad.cpp">
@@ -500,6 +512,10 @@
     <ClCompile Include="FullscreenDepthTextureRenderPipeline.cpp">
       <Filter>SourceFiles\RenderPipeline\Base\FullscreenDepthTextureRenderPipeline</Filter>
     </ClCompile>
+    <ClCompile Include="GeometryRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline\GeometryPass</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryPass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ShaderConstant.hlsl">

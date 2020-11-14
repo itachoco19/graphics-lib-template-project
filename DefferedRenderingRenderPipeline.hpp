@@ -1,4 +1,5 @@
 #pragma once
+#include "GeometryPass.hpp"
 #include "FullscreenQuadRenderPipeline.hpp"
 #include "RenderPipelineWithImGuiComponents.hpp"
 
@@ -10,7 +11,6 @@ class DefferedRenderingRenderPipeline
 	: public RenderPipelineWithImGuiComponents
 {
 public:
-	using GeometryPass = std::shared_ptr<cg::RenderPipelineMRT>;
 	class LightingPass
 		: public FullscreenQuadRenderPipeline
 	{

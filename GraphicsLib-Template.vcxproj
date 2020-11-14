@@ -160,6 +160,8 @@
     <ClCompile Include="FullscreenDepthTexturePerspectiveRenderPipeine.cpp" />
     <ClCompile Include="FullscreenDepthTextureRenderPipeline.cpp" />
     <ClCompile Include="FullscreenTextureRenderPipeline.cpp" />
+    <ClCompile Include="GeometryPass.cpp" />
+    <ClCompile Include="GeometryRenderPipeline.cpp" />
     <ClCompile Include="ImGuiGraphicsLibDefaultInspector.cpp" />
     <ClCompile Include="ImGuiCameraInspector.cpp" />
     <ClCompile Include="ConstantWithImGuiComponents.cpp" />
@@ -203,6 +205,8 @@
     <ClInclude Include="FullscreenDepthTexturePerspectiveRenderPipeline.hpp" />
     <ClInclude Include="FullscreenDepthTextureOrthographicRenderPipeline.hpp" />
     <ClInclude Include="FullscreenDepthTextureRenderPipeline.hpp" />
+    <ClInclude Include="GeometryPass.hpp" />
+    <ClInclude Include="GeometryRenderPipeline.hpp" />
     <ClInclude Include="ImGuiGraphicsLibDefaultInspector.hpp" />
     <ClInclude Include="ObjectControllingMethod.hpp" />
     <ClInclude Include="CameraController.hpp" />
