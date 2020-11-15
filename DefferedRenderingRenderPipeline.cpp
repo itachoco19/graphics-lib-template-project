@@ -22,6 +22,11 @@ void DefferedRenderingRenderPipeline::render(const cg::Scene& scene)
 	m_lightingPass.render();
 }
 
+cg::GBuffer DefferedRenderingRenderPipeline::LightingPass::acessToGBuffer() const
+{
+	return m_gbuffer;
+}
+
 DefferedRenderingRenderPipeline::LightingPass::LightingPass(const std::string& name, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IPixelShader> pixelShader, const ShaderResourceSetCall& setCallPixelShaderResource)
 	: FullscreenQuadRenderPipeline(name, lightConstantBuffer, pixelShader, setCallPixelShaderResource)
 {

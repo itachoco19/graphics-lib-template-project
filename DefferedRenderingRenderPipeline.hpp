@@ -14,8 +14,10 @@ public:
 	class LightingPass
 		: public FullscreenQuadRenderPipeline
 	{
-	protected:
+	private:
 		cg::GBuffer m_gbuffer;
+	protected:
+		[[nodiscard]] cg::GBuffer acessToGBuffer() const;
 	public:
 		LightingPass(const std::string& name, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IPixelShader> pixelShader, const ShaderResourceSetCall& setCallPixelShaderResource);
 		LightingPass(const std::string& name, std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IPixelShader> pixelShader, const ShaderResourceSetCall& setCallPixelShaderResource);
