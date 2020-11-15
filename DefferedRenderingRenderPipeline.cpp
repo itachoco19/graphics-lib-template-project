@@ -22,6 +22,83 @@ void DefferedRenderingRenderPipeline::render(const cg::Scene& scene)
 	m_lightingPass.render();
 }
 
+
+
+
+
+DefferedRenderingRenderPipeline::GeometryPass::GeometryPass(const std::string& name, const GeometryRenderPipelineList& geometryRenderPipelineList)
+	: RenderPipelineWithImGuiComponents(name),
+	m_geometryRenderPipelineList(geometryRenderPipelineList)
+{
+}
+
+void DefferedRenderingRenderPipeline::GeometryPass::render(const cg::Scene& scene, cg::Camera& customCamera)
+{
+	for (auto geometryRenderPipeline : m_geometryRenderPipelineList)
+	{
+		geometryRenderPipeline->render(scene, customCamera);
+	}
+}
+
+void DefferedRenderingRenderPipeline::GeometryPass::render(const cg::Scene& scene)
+{
+	for (auto geometryRenderPipeline : m_geometryRenderPipelineList)
+	{
+		geometryRenderPipeline->render(scene);
+	}
+}
+
+void DefferedRenderingRenderPipeline::GeometryPass::render()
+{
+
+	for (auto geometryRenderPipeline : m_geometryRenderPipelineList)
+	{
+		geometryRenderPipeline->render();
+	}
+}
+
+cg::GBuffer DefferedRenderingRenderPipeline::GeometryPass::getGBuffer() const
+{
+	if (m_geometryRenderPipelineList.empty())
+	{
+		return cg::GBuffer();
+	}
+	return m_geometryRenderPipelineList.begin()->get()->getGBuffer();
+}
+
+void DefferedRenderingRenderPipeline::GeometryPass::initializeMultipleRenderTarget(std::shared_ptr<cg::IMultipleRenderTarget> multipleRenderTarget)
+{
+	for (auto geometryRenderPipeline : m_geometryRenderPipelineList)
+	{
+		geometryRenderPipeline->initializeMultipleRenderTarget(multipleRenderTarget);
+	}
+}
+
+void DefferedRenderingRenderPipeline::GeometryPass::initializeDepthStencilBuffer(std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer)
+{
+	for (auto geometryRenderPipeline : m_geometryRenderPipelineList)
+	{
+		geometryRenderPipeline->initializeDepthStencilBuffer(depthStencilBuffer);
+	}
+}
+
+void DefferedRenderingRenderPipeline::GeometryPass::drawImGuiComponents()
+{
+	for (auto geometryRenderPipeline : m_geometryRenderPipelineList)
+	{
+		if (ImGui::TreeNode(geometryRenderPipeline->name().c_str()))
+		{
+			geometryRenderPipeline->drawImGuiComponents();
+
+			ImGui::TreePop();
+		}
+	}
+}
+
+
+
+
+
 cg::GBuffer DefferedRenderingRenderPipeline::LightingPass::acessToGBuffer() const
 {
 	return m_gbuffer;
