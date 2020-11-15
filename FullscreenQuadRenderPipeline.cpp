@@ -4,16 +4,16 @@
 
 
 
-FullscreenQuadRenderPipeline::FullscreenQuadRenderPipeline(const std::string& name, std::shared_ptr<cg::IPixelShader> pixelShader, const ShaderResourceSetCall& setCallPixelShaderResource)
-	: FullscreenQuadRenderPipeline(name, cg::MainRenderTarget::shared.get(), pixelShader, setCallPixelShaderResource)
+FullscreenQuadRenderPipeline::FullscreenQuadRenderPipeline(const std::string& name, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IPixelShader> pixelShader, const ShaderResourceSetCall& setCallPixelShaderResource)
+	: FullscreenQuadRenderPipeline(name, cg::MainRenderTarget::shared.get(), lightConstantBuffer, pixelShader, setCallPixelShaderResource)
 {
 }
-FullscreenQuadRenderPipeline::FullscreenQuadRenderPipeline(const std::string& name, std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::IPixelShader> pixelShader, const ShaderResourceSetCall& setCallPixelShaderResource)
-	: FullscreenQuadRenderPipeline(name, renderTarget, FullscreenQuad(), pixelShader, setCallPixelShaderResource)
+FullscreenQuadRenderPipeline::FullscreenQuadRenderPipeline(const std::string& name, std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IPixelShader> pixelShader, const ShaderResourceSetCall& setCallPixelShaderResource)
+	: FullscreenQuadRenderPipeline(name, renderTarget, FullscreenQuad(), lightConstantBuffer, pixelShader, setCallPixelShaderResource)
 {
 }
-FullscreenQuadRenderPipeline::FullscreenQuadRenderPipeline(const std::string& name, std::shared_ptr<cg::IRenderTarget> renderTarget, const FullscreenQuad& quad, std::shared_ptr<cg::IPixelShader> pixelShader, const ShaderResourceSetCall& setCallPixelShaderResource)
-	: RenderPipelineSRT(name, { "" }, renderTarget, nullptr, nullptr, nullptr, nullptr, nullptr,
+FullscreenQuadRenderPipeline::FullscreenQuadRenderPipeline(const std::string& name, std::shared_ptr<cg::IRenderTarget> renderTarget, const FullscreenQuad& quad, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IPixelShader> pixelShader, const ShaderResourceSetCall& setCallPixelShaderResource)
+	: RenderPipelineSRT(name, { "" }, renderTarget, nullptr, nullptr, nullptr, lightConstantBuffer, nullptr,
 	  {
 		  { cg::ShaderStage::vs, std::dynamic_pointer_cast<cg::IVertexShader>(cg::ShaderPool::shared.createFromFileAndAdd(cg::ShaderStage::vs, "FullscreenQuad.vsh", "FullscreenQuad.vsh", "vs_main", "vs_5_0")) },
 		  { cg::ShaderStage::ps, pixelShader }

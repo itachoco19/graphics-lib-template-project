@@ -23,6 +23,7 @@ FullscreenTextureRenderPipeline::FullscreenTextureRenderPipeline(const std::stri
 	: FullscreenQuadRenderPipeline(name, 
 		                           renderTarget,
 		                           quad,
+		                           nullptr,
 		                           customPixelShader,
 								   [&, additionalSetCall, customPixelShader]() 
 		                           {
