@@ -18,7 +18,6 @@ void DefferedRenderingRenderPipeline::render()
 void DefferedRenderingRenderPipeline::render(const cg::Scene& scene)
 {
 	m_geometryPass.render(scene);
-	m_lightingPass.setGBuffer(m_geometryPass.getGBuffer());
 	m_lightingPass.render();
 }
 
