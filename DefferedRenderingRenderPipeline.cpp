@@ -11,16 +11,6 @@ DefferedRenderingRenderPipeline::DefferedRenderingRenderPipeline(const std::stri
 {
 }
 
-void DefferedRenderingRenderPipeline::render()
-{
-}
-
-void DefferedRenderingRenderPipeline::render(const cg::Scene& scene)
-{
-	m_geometryPass.render(scene);
-	m_lightingPass.render();
-}
-
 
 
 
