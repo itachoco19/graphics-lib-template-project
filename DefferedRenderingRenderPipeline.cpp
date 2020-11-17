@@ -4,6 +4,16 @@
 
 
 
+DefferedRenderingRenderPipeline::GeometryPass DefferedRenderingRenderPipeline::accessToGeometryPass() const noexcept
+{
+	return m_geometryPass;
+}
+
+DefferedRenderingRenderPipeline::LightingPass DefferedRenderingRenderPipeline::accessToLightingPass() const noexcept
+{
+	return m_lightingPass;
+}
+
 DefferedRenderingRenderPipeline::DefferedRenderingRenderPipeline(const std::string& name, const GeometryPass& geometryPass, const LightingPass& lightingPass)
 	: RenderPipelineWithImGuiComponents(name),
 	  m_geometryPass(geometryPass),
