@@ -23,7 +23,7 @@ void GeometryRenderPipeline::render(const cg::Scene& scene, const cg::Camera& cu
 
 void GeometryRenderPipeline::render(const cg::Scene& scene)
 {
-	renderDefault(scene, scene.camera);
+	render(scene, scene.camera);
 }
 
 void GeometryRenderPipeline::render()
