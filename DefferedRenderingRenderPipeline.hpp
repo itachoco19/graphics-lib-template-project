@@ -44,6 +44,9 @@ public:
 private:
 	GeometryPass m_geometryPass;
 	LightingPass m_lightingPass;
+protected:
+	[[nodiscard]] GeometryPass accessToGeometryPass() const noexcept;
+	[[nodiscard]] LightingPass accessToLightingPass() const noexcept;
 public:
 	DefferedRenderingRenderPipeline(const std::string& name, const GeometryPass& geometryPass, const LightingPass& lightingPass);
 	virtual ~DefferedRenderingRenderPipeline() = default;
