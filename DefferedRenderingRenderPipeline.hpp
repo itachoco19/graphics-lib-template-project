@@ -47,7 +47,4 @@ private:
 public:
 	DefferedRenderingRenderPipeline(const std::string& name, const GeometryPass& geometryPass, const LightingPass& lightingPass);
 	virtual ~DefferedRenderingRenderPipeline() = default;
-
-	void render() override;
-	void render(const cg::Scene& scene) override;
 };
