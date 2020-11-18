@@ -9,9 +9,5 @@ struct PSInput
 
 float4 ps_main(PSInput input) : SV_TARGET
 {
-	float n = 0.001;
-	float f = 5.0;
-	float z = target.Sample(targetSampler, input.uv).r;
-	float depth = (2.0*n)/((1.0-z)*f+(1.0+z)*n);
-	return float4(float3(depth, depth, depth), 1.0);
+	return float4(target.Sample(targetSampler, input.uv).rgb, 1.0);
 }
