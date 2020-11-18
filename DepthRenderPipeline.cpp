@@ -22,12 +22,12 @@ void DepthRenderPipeline::initializeDepthStencilBuffer(std::shared_ptr<cg::IDept
 
 void DepthRenderPipeline::render(const cg::Scene& scene, const cg::Camera& customCamera)
 {
-	renderDefault(scene, customCamera, [&](const cg::Scene&){ m_renderTarget->set(m_depthStencilBuffer); m_additionalSetCall(scene); }, [](){});
+	renderDefault(scene, customCamera, [&](const cg::Scene&){ m_renderTarget->set(m_depthStencilBuffer); m_additionalSetCall(scene); }, [](){}, true);
 }
 
 void DepthRenderPipeline::render(const cg::Scene& scene)
 {
-	renderDefault(scene, scene.camera);
+	renderDefault(scene, scene.camera, true);
 }
 
 void DepthRenderPipeline::render()
