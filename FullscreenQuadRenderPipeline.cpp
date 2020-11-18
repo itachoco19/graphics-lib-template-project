@@ -43,4 +43,17 @@ void FullscreenQuadRenderPipeline::render()
 
 void FullscreenQuadRenderPipeline::render(const cg::Scene& scene)
 {
+	auto setCall = [&](const cg::Scene& scene_)
+	{
+		m_renderTarget->refresh();
+		m_renderTarget->set(nullptr);
+
+		m_additionalSetCall();
+	};
+	auto drawCall = [&]()
+	{
+		m_quad->parts.at("main").getGeometryBuffer()->draw(m_quad->primitiveTopology, m_quad->instanceCount);
+	};
+
+	renderDefault(scene, setCall, drawCall, false);
 }
