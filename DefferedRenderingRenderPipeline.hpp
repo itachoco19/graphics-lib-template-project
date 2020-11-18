@@ -37,17 +37,17 @@ public:
 	public:
 		using ShaderResourceGBufferSetCall = std::function<void(const cg::GBuffer&)>;
 	public:
-		LightingPass(const std::string& name, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IPixelShader> pixelShader, const cg::GBuffer& gbuffer, const ShaderResourceGBufferSetCall& shaderResourceSetCall);
-		LightingPass(const std::string& name, std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IPixelShader> pixelShader, const cg::GBuffer& gbuffer, const ShaderResourceGBufferSetCall& shaderResourceSetCall);
-		LightingPass(const std::string& name, std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, const FullscreenQuad& quad, std::shared_ptr<cg::IPixelShader> pixelShader, const cg::GBuffer& gbuffer, const ShaderResourceGBufferSetCall& shaderResourceSetCall);
+		LightingPass(const std::string& name, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IPixelShader> pixelShader, const cg::GBuffer& gbuffer, const ShaderResourceGBufferSetCall& shaderResourceSetCall);
+		LightingPass(const std::string& name, std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IPixelShader> pixelShader, const cg::GBuffer& gbuffer, const ShaderResourceGBufferSetCall& shaderResourceSetCall);
+		LightingPass(const std::string& name, std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, const FullscreenQuad& quad, std::shared_ptr<cg::IPixelShader> pixelShader, const cg::GBuffer& gbuffer, const ShaderResourceGBufferSetCall& shaderResourceSetCall);
 	};
 private:
 	GeometryPass m_geometryPass;
 	LightingPass m_lightingPass;
+protected:
+	[[nodiscard]] GeometryPass accessToGeometryPass() const noexcept;
+	[[nodiscard]] LightingPass accessToLightingPass() const noexcept;
 public:
 	DefferedRenderingRenderPipeline(const std::string& name, const GeometryPass& geometryPass, const LightingPass& lightingPass);
 	virtual ~DefferedRenderingRenderPipeline() = default;
-
-	void render() override;
-	void render(const cg::Scene& scene) override;
 };

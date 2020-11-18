@@ -24,6 +24,7 @@ FullscreenTextureRenderPipeline::FullscreenTextureRenderPipeline(const std::stri
 		                           renderTarget,
 		                           quad,
 		                           nullptr,
+		                           nullptr,
 		                           customPixelShader,
 								   [&, additionalSetCall, customPixelShader]() 
 		                           {
