@@ -18,6 +18,9 @@ GeometryRenderPipeline::GeometryRenderPipeline(const std::string& name, const cg
 
 void GeometryRenderPipeline::render(const cg::Scene& scene, const cg::Camera& customCamera)
 {
+	m_multipleRenderTarget->refreshAll();
+	m_depthStencilBuffer->refresh();
+
 	renderDefault(scene, customCamera, [&](const cg::Scene&) { m_multipleRenderTarget->set(m_depthStencilBuffer); m_additionalSetCall(scene); }, []() {}, true);
 }
 
