@@ -11,7 +11,7 @@
 #include "SampleRenderPipeline.hpp"
 
 #include "SimplePBRMaterialConstant.hpp"
-
+#include "DefferedSampleRenderPipeline.hpp"
 
 
 
@@ -38,14 +38,19 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
 
 	// Setup render target
 	auto mainRenderTarget = cg::MainRenderTarget::shared.get();
-	auto depthStencilBuffer = cg::API::shared.graphics()->createDepthStencilBuffer(windowSize.x, windowSize.y, cg::TextureFormat::D32_FLOAT, mainRenderTarget->getMSAASampleCount(), mainRenderTarget->getMSAAQualityLevel());
-
+	
 
 
 	// Setup render pipeline
-	auto renderPipeline = std::make_shared<SampleRenderPipeline>(mainRenderTarget, depthStencilBuffer, cg::API::shared.graphics()->createDepthStencilTester(cg::ComparisonFunction::less, cg::ComparisonFunction::always, true, false, true));
-
-
+	std::shared_ptr<DefferedSampleRenderPipeline> renderPipeline;
+	try
+	{
+		renderPipeline = std::make_shared<DefferedSampleRenderPipeline>(mainRenderTarget);
+	}
+	catch (cpp::com_runtime_error e)
+	{
+		e.message();
+	}
 
 	// Prepare material
 	auto materialConstant = std::make_shared<SimplePBRMaterialConstant>();
@@ -76,7 +81,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
 	sphere->getTransformRef().changePosition(0.75f, 0.75f*0.5f, 0.0f);
 	box->getTransformRef().changePosition(  -0.75f, 0.75f*0.5f, 0.0f);
 
-	const auto renderingGroupName = SampleRenderPipeline::targetRenderingGroupName;
+	//const auto renderingGroupName = SampleRenderPipeline::targetRenderingGroupName;
+	const auto renderingGroupName = "Sample";
 	plane->moveTo(renderingGroupName);
 	sphere->moveTo(renderingGroupName);
 	box->moveTo(renderingGroupName);
