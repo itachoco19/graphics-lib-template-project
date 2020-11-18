@@ -118,7 +118,7 @@ void SampleShadingRenderPipeline::render(const cg::Scene& scene)
 	auto drawCall = [&]()
 	{
 	};
-	renderDefault(scene, setCall, drawCall);
+	renderDefault(scene, setCall, drawCall, true);
 }
 
 void SampleShadingRenderPipeline::render()
