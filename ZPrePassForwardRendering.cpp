@@ -4,7 +4,7 @@
 
 
 
-ZPrePassForwardRendering::ZPrePassForwardRendering(const std::string& name, const DepthPass& zPass, std::shared_ptr<ForwardRenderingRenderPipeline> forwardRenderingRenderPipeline)
+ZPrePassForwardRendering::ZPrePassForwardRendering(const std::string& name, const DepthPass& zPass, std::shared_ptr<ForwardRenderPipeline> forwardRenderingRenderPipeline)
 	: RenderPipelineWithImGuiComponents(name),
 	  m_zPass(zPass),
 	  m_forwardRenderingRenderPipeline(forwardRenderingRenderPipeline)
