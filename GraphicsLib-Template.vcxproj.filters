@@ -125,13 +125,7 @@
       <Filter>HeaderFiles\Light\PointLight</Filter>
     </ClInclude>
     <ClInclude Include="SampleShadingRenderPipeline.hpp">
-      <Filter>HeaderFiles\RenderPipeline\Sample\ShadingRenderPipeline</Filter>
-    </ClInclude>
-    <ClInclude Include="SampleRenderPipeline.hpp">
-      <Filter>HeaderFiles\RenderPipeline\Sample</Filter>
-    </ClInclude>
-    <ClInclude Include="ZPrePassSampleRenderPipeline.hpp">
-      <Filter>HeaderFiles\RenderPipeline\Sample</Filter>
+      <Filter>HeaderFiles\RenderPipeline\Sample\Forward\ShadingRenderPipeline</Filter>
     </ClInclude>
     <ClInclude Include="FullscreenDepthTexturePerspectiveRenderPipeline.hpp">
       <Filter>HeaderFiles\RenderPipeline\Base\FullscreenDepthTextureRenderPipeline</Filter>
@@ -141,6 +135,18 @@
     </ClInclude>
     <ClInclude Include="FullscreenDepthTextureRenderPipeline.hpp">
       <Filter>HeaderFiles\RenderPipeline\Base\FullscreenDepthTextureRenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline\GeometryRenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="DefferedSampleRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Sample\Deffered</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardSampleRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Sample\Forward</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardZPrePassSampleRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Sample\Forward</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -342,14 +348,8 @@
     <Filter Include="SourceFiles\RenderPipeline\Sample">
       <UniqueIdentifier>{2175930c-7c86-4c9f-bb49-f40a2403e456}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SourceFiles\RenderPipeline\Sample\SampleShadingRenderPipeline">
-      <UniqueIdentifier>{0710561d-058a-4673-b1fc-6d8422ee3294}</UniqueIdentifier>
-    </Filter>
     <Filter Include="HeaderFiles\RenderPipeline\Sample">
       <UniqueIdentifier>{a2756566-73a7-4d3d-a7d5-51eb298fc340}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="HeaderFiles\RenderPipeline\Sample\ShadingRenderPipeline">
-      <UniqueIdentifier>{a885205a-dff4-4c96-adf7-392d04f63307}</UniqueIdentifier>
     </Filter>
     <Filter Include="SourceFiles\Light\DirectionalLight">
       <UniqueIdentifier>{f572ea2e-d614-4b51-99c6-4f6160b17401}</UniqueIdentifier>
@@ -359,9 +359,6 @@
     </Filter>
     <Filter Include="ShaderFiles\HLSL\PixelShader">
       <UniqueIdentifier>{9fd3c012-977e-4ff4-8789-dda473c6a254}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShaderFiles\HLSL\PixelShader\Shading">
-      <UniqueIdentifier>{49bb3877-8360-4bf8-b789-bf0492d5ea1f}</UniqueIdentifier>
     </Filter>
     <Filter Include="ShaderFiles\HLSL\PixelShader\FullscreenTexture">
       <UniqueIdentifier>{5db136e4-3eb9-495f-b0cc-78ceb8b902d5}</UniqueIdentifier>
@@ -374,6 +371,57 @@
     </Filter>
     <Filter Include="ShaderFiles\HLSL\VertexShader\DepthPass">
       <UniqueIdentifier>{373232f3-0676-43cb-8091-7d453b63fdc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline\GeometryPass">
+      <UniqueIdentifier>{220ab416-12f3-416d-bbd9-900ebb4bb532}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline\GeometryRenderPipeline">
+      <UniqueIdentifier>{72932901-cd3f-4658-86d7-5066dc6c02c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Sample\Forward">
+      <UniqueIdentifier>{ed68bfb3-ca66-4382-ba54-53d04d5b2ed0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Sample\Forward\SampleShadingRenderPipeline">
+      <UniqueIdentifier>{0710561d-058a-4673-b1fc-6d8422ee3294}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Sample\Deffered">
+      <UniqueIdentifier>{d083befb-6503-4231-8181-40c5a4cbc650}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline\Sample\Deffered">
+      <UniqueIdentifier>{3b8e3b7f-6193-43bd-acfa-8e684bbcea37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline\Sample\Forward">
+      <UniqueIdentifier>{a2d48acd-c088-4a1f-937d-51c5ac1b557c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline\Sample\Forward\ShadingRenderPipeline">
+      <UniqueIdentifier>{a885205a-dff4-4c96-adf7-392d04f63307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles\HLSL\PixelShader\Sample">
+      <UniqueIdentifier>{3484a4f6-4abe-456e-8904-eebe0584d512}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles\HLSL\PixelShader\Sample\Deffered">
+      <UniqueIdentifier>{87468f68-95ec-4a11-8f11-24bc75ab0b98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles\HLSL\PixelShader\Sample\Deffered\LightingPass">
+      <UniqueIdentifier>{427176e9-2a68-4019-a22f-0a4de2c1f00e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles\HLSL\PixelShader\Sample\Deffered\GeometryPass">
+      <UniqueIdentifier>{5d21d244-f8b2-4a41-b45d-4b634778fa51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles\HLSL\PixelShader\Sample\Forward">
+      <UniqueIdentifier>{07ccac0d-0859-4c23-b68e-10673db792f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles\HLSL\VertexShader\Sample">
+      <UniqueIdentifier>{cb242a68-9d2d-4b62-a65a-1fec2de66b72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles\HLSL\VertexShader\Sample\Deffered">
+      <UniqueIdentifier>{38a9fca2-a10b-4964-bce4-4615fb96fd0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles\HLSL\VertexShader\Sample\Deffered\GeometryPass">
+      <UniqueIdentifier>{49c690a5-5d96-44bc-954d-4c99cf628959}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles\HLSL\VertexShader\Sample\Forward">
+      <UniqueIdentifier>{d1cc531a-5853-4220-a6af-1ffd4756968e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -477,13 +525,7 @@
       <Filter>SourceFiles\ImGui\Components\GraphicsLibDefaultInspector</Filter>
     </ClCompile>
     <ClCompile Include="SampleShadingRenderPipeline.cpp">
-      <Filter>SourceFiles\RenderPipeline\Sample\SampleShadingRenderPipeline</Filter>
-    </ClCompile>
-    <ClCompile Include="SampleRenderPipeline.cpp">
-      <Filter>SourceFiles\RenderPipeline\Sample</Filter>
-    </ClCompile>
-    <ClCompile Include="ZPrePassSampleRenderPipeline.cpp">
-      <Filter>SourceFiles\RenderPipeline\Sample</Filter>
+      <Filter>SourceFiles\RenderPipeline\Sample\Forward\SampleShadingRenderPipeline</Filter>
     </ClCompile>
     <ClCompile Include="SimpleDirectionalLight.cpp">
       <Filter>SourceFiles\Light\DirectionalLight</Filter>
@@ -500,6 +542,18 @@
     <ClCompile Include="FullscreenDepthTextureRenderPipeline.cpp">
       <Filter>SourceFiles\RenderPipeline\Base\FullscreenDepthTextureRenderPipeline</Filter>
     </ClCompile>
+    <ClCompile Include="GeometryRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline\GeometryPass</Filter>
+    </ClCompile>
+    <ClCompile Include="DefferedSampleRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Sample\Deffered</Filter>
+    </ClCompile>
+    <ClCompile Include="ForwardSampleRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Sample\Forward</Filter>
+    </ClCompile>
+    <ClCompile Include="ForwardZPrePassSampleRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Sample\Forward</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ShaderConstant.hlsl">
@@ -514,17 +568,11 @@
     <None Include="FullscreenQuad.vsh">
       <Filter>ShaderFiles\HLSL\VertexShader\FullscreenQuad</Filter>
     </None>
-    <None Include="Position3Normal3InOut.vsh">
-      <Filter>ShaderFiles\HLSL\VertexShader</Filter>
-    </None>
     <None Include="DepthPass.vsh">
       <Filter>ShaderFiles\HLSL\VertexShader\DepthPass</Filter>
     </None>
     <None Include="FullscreenTexture.psh">
       <Filter>ShaderFiles\HLSL\PixelShader\FullscreenTexture</Filter>
-    </None>
-    <None Include="SimpleShading.psh">
-      <Filter>ShaderFiles\HLSL\PixelShader\Shading</Filter>
     </None>
     <None Include="BRDF.hlsl">
       <Filter>ShaderFiles\HLSL\Reuse\Functions</Filter>
@@ -534,6 +582,21 @@
     </None>
     <None Include="FullscreenDepthTextureOrthographic.psh">
       <Filter>ShaderFiles\HLSL\PixelShader\FullscreenDepthTexture</Filter>
+    </None>
+    <None Include="SampleGeometryPass.psh">
+      <Filter>ShaderFiles\HLSL\PixelShader\Sample\Deffered\GeometryPass</Filter>
+    </None>
+    <None Include="SampleGeometryPass.vsh">
+      <Filter>ShaderFiles\HLSL\VertexShader\Sample\Deffered\GeometryPass</Filter>
+    </None>
+    <None Include="SampleLightingPass.psh">
+      <Filter>ShaderFiles\HLSL\PixelShader\Sample\Deffered\LightingPass</Filter>
+    </None>
+    <None Include="SampleShading.psh">
+      <Filter>ShaderFiles\HLSL\PixelShader\Sample\Forward</Filter>
+    </None>
+    <None Include="SamplePosition3Normal3.vsh">
+      <Filter>ShaderFiles\HLSL\VertexShader\Sample\Forward</Filter>
     </None>
   </ItemGroup>
 </Project>

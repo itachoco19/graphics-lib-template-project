@@ -1,0 +1,36 @@
+#include "ShaderConstant.hlsl"
+
+
+
+
+
+Define_SimplePBRMaterial_HLSL(0);
+
+struct PSInput
+{
+	float4 position: SV_POSITION;
+	float3 normal:   TEXCOORD0;
+};
+
+struct PSOutput
+{
+	float4 baseColorRoughness: SV_TARGET0;
+	float4 normalMetalness:    SV_TARGET1;
+	float  ior:                SV_TARGET2;
+};
+
+
+PSOutput ps_main(PSInput input)
+{
+	PSOutput output;
+
+	output.baseColorRoughness.xyz = color;
+	output.baseColorRoughness.w   = roughness;
+
+	output.normalMetalness.xyz = normalize(input.normal);
+	output.normalMetalness.w   = metalness;
+
+	output.ior = ior;
+
+	return output;
+}

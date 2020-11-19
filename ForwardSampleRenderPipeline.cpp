@@ -1,20 +1,20 @@
-#include "SampleRenderPipeline.hpp"
+#include "ForwardSampleRenderPipeline.hpp"
 #include "SimpleDirectionalLight.hpp"
 
 
 
 
 
-const std::string SampleRenderPipeline::targetRenderingGroupName = "SimpleShading";
-const cg::RasterizationBasedRenderPipeline::TargetRenderingGroupNameList targetRenderingGroupNameList = { SampleRenderPipeline::targetRenderingGroupName };
+const std::string ForwardSampleRenderPipeline::targetRenderingGroupName = "SimpleShading";
+const cg::RasterizationBasedRenderPipeline::TargetRenderingGroupNameList targetRenderingGroupNameList = { ForwardSampleRenderPipeline::targetRenderingGroupName };
 
 
 
 
 
-SampleRenderPipeline::SampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer, std::shared_ptr<cg::IDepthStencilTester> depthStencilTester, bool shouldRefreshRenderTarget, bool shouldRefreshDepthStencilBuffer)
+ForwardSampleRenderPipeline::ForwardSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer, std::shared_ptr<cg::IDepthStencilTester> depthStencilTester, bool shouldRefreshRenderTarget, bool shouldRefreshDepthStencilBuffer)
 	: ForwardRenderingRenderPipeline("Test Render Pipeline", renderTarget, depthStencilBuffer),
-	  m_shadowMap(cg::API::shared.graphics()->createDepthStencilBuffer(1500, 800, cg::TextureFormat::D32_FLOAT, renderTarget->getMSAASampleCount(), renderTarget->getMSAAQualityLevel())),
+	  m_shadowMap(cg::API::shared.graphics()->createDepthStencilBuffer(cg::System::getWindowInfo().getSize(), cg::TextureFormat::D32_FLOAT, renderTarget->getMSAASampleCount(), renderTarget->getMSAAQualityLevel())),
 	  m_shadowMapSampler(cg::API::shared.graphics()->createTextureSampler([]() 
       {
 	      cg::TextureSamplerDescriptor descriptor;
@@ -29,7 +29,7 @@ SampleRenderPipeline::SampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> re
 	m_shadowMapRenderingPass.initializeDepthStencilBuffer(m_shadowMap);
 }
 
-void SampleRenderPipeline::render(const cg::Scene& scene)
+void ForwardSampleRenderPipeline::render(const cg::Scene& scene)
 {
 	if (m_shouldRefreshRenderTarget)
 	{
@@ -47,10 +47,10 @@ void SampleRenderPipeline::render(const cg::Scene& scene)
 	m_shadingRenderPipeline.render(scene);
 }
 
-void SampleRenderPipeline::render()
+void ForwardSampleRenderPipeline::render()
 {
 }
 
-void SampleRenderPipeline::drawImGuiComponents()
+void ForwardSampleRenderPipeline::drawImGuiComponents()
 {
 }

@@ -1,0 +1,118 @@
+#include "ShaderConstant.hlsl"
+#include "BRDF.hlsl"
+
+
+
+
+
+Define_Transform_InvV_InvP_LVP_HLSL(1);
+Define_SimpleLight_HLSL(2);
+
+Texture2D<float4> baseColorRoughnessMap: register(t0);
+Texture2D<float4> normalMetalnessMap   : register(t1);
+Texture2D<float>  iorMap               : register(t2);
+Texture2D<float>  depthMap             : register(t3);
+Texture2D<float>  shadowMap            : register(t4);
+
+SamplerState gbufferSampler : register(s0);
+
+
+
+
+
+struct PSInput
+{
+	float4 position: SV_POSITION;
+	float2 uv      : TEXCOORD0;
+};
+
+
+
+
+
+inline float3 calcBRDF(float3 p, float3 n, float3 cp, float3 ldir, float3 objectColor, float objectRoughness, float3 objectF0, float LdotN, float satuLdotN)
+{
+	float3 vdir = normalize(cp - p);
+	float3 h = normalize(vdir - ldir);
+
+	float VdotN = dot(vdir, n);
+	float satuLdotH = saturate(dot(-ldir, h));
+	float satuVdotN = saturate(VdotN);
+	float satuVdotH = saturate(dot(vdir, h));
+	float satuHdotN = saturate(dot(h, n));
+
+	float alpha = objectRoughness * objectRoughness;
+	float alphaSquared = alpha * alpha;
+
+	float D = calcGGXDistribution(satuHdotN, alphaSquared);
+	float G = calcSmithJointMaskingShadowing(satuLdotN, satuVdotN, alphaSquared);
+	float F = calcSchlickApproximation(objectF0, satuVdotH);
+
+	float3 diffuseBRDF = calcNormalizedDisneyDiffuseBRDF(objectColor, satuLdotH, satuLdotN, satuVdotN, objectRoughness);
+	float3 specularBRDF = calcTorranceSparrowBRDF(objectColor, D, G, F, abs(LdotN), abs(VdotN));
+
+	return diffuseBRDF + specularBRDF;
+}
+inline float3 calcRadiance(float3 p, float3 n, float3 objectColor, float objectRoughness, float3 objectF0, float3 ldir, float3 lightColor, float lightAttenuation, float3 cp)
+{
+	float LdotN = dot(-ldir, n);
+	float satuLdotN = saturate(LdotN);
+
+	return calcBRDF(p, n, cp, ldir, objectColor, objectRoughness, objectF0, LdotN, satuLdotN) * lightColor * lightAttenuation * satuLdotN;
+}
+
+
+
+
+
+inline float3 calcDirectionalLight(float3 p, float3 n, float3 objectColor, float objectRoughness, float3 objectF0, float3 ldir, float3 lightColor, float3 cp)
+{
+	return calcRadiance(p, n, objectColor, objectRoughness, objectF0, ldir, lightColor, 1.0, cp);
+}
+inline float3 calcPointLight(float3 p, float3 n, float3 objectColor, float objectRoughness, float3 objectF0, float3 lightPosition, float3 lightColor, float3 Kclq, float3 cp)
+{
+	float3 l2p = p - lightPosition;
+	float d = length(l2p);
+
+	return calcRadiance(p, n, objectColor, objectRoughness, objectF0, l2p / d, lightColor, 1.0 / (Kclq.x + Kclq.y * d + Kclq.z * d * d), cp);
+}
+
+
+
+
+
+float4 ps_main(PSInput input) : SV_TARGET
+{
+	const float4 baseColorRoughness = baseColorRoughnessMap.Sample(gbufferSampler, input.uv);
+	const float4 normalMetalness    = normalMetalnessMap.Sample(gbufferSampler, input.uv);
+
+	const float3 color     = baseColorRoughness.xyz;
+	const float  roughness = baseColorRoughness.w;
+	const float  metalness = normalMetalness.w;
+	const float  ior       = iorMap.Sample(gbufferSampler, input.uv).r;
+	const float3 f0        = calcF0FromIOR(ior)*(1.0-metalness)+color*metalness;
+
+	const float3 n              = normalMetalness.xyz;
+	const float  depth          = depthMap.Sample(gbufferSampler, input.uv).r;
+	const float4 viewPosition4  = mul(float4(float2(input.uv.x*2.0-1.0, -input.uv.y*2.0+1.0), depth, 1.0), invP);
+	const float4 worldPosition4 = mul(viewPosition4, invV);
+	const float3 viewPosition   = viewPosition4.xyz/viewPosition4.w;
+	const float3 worldPosition  = worldPosition4.xyz/worldPosition4.w;
+	const float4 lpPosition     = mul(worldPosition4, lvp);
+	
+	float3 outColor = calcDirectionalLight(worldPosition, n, color, roughness, f0, directionalLight.direction, directionalLight.color, cameraPosition);
+	for (int i = 0; i < 1; ++i)
+	{
+		SimplePointLight pointLight = pointLights[i];
+		outColor += calcPointLight(worldPosition, n, color, roughness, f0, pointLight.position, pointLight.color, pointLight.Kclq, cameraPosition);
+	}
+	
+	const float2 shadowUV = float2(lpPosition.x/lpPosition.w*0.5+0.5, -lpPosition.y/lpPosition.w*0.5+0.5);
+	const float lpDepth = shadowMap.Sample(gbufferSampler, shadowUV).r;
+	const float cplpDepth = lpPosition.z/lpPosition.w;
+	if (lpDepth+0.005 < cplpDepth)
+	{
+		outColor *= 0.5;
+	}
+	return float4(outColor , 1.0);
+}
