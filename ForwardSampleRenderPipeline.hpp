@@ -1,6 +1,6 @@
 #pragma once
 #include "SampleShadingRenderPipeline.hpp"
-#include "ForwardRenderingRenderPipeline.hpp"
+#include "ForwardRenderPipeline.hpp"
 #include "DepthPass.hpp"
 
 
@@ -8,7 +8,7 @@
 
 
 class ForwardSampleRenderPipeline
-	: public ForwardRenderingRenderPipeline
+	: public ForwardRenderPipeline
 {
 private:
 	std::shared_ptr<cg::IDepthStencilBuffer> m_shadowMap;
