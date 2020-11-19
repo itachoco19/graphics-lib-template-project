@@ -5,15 +5,16 @@
 
 
 
-Define_Transform_InvV_InvP_LVP_HLSL(0);
-Define_SimpleLight_HLSL(1);
+Define_Transform_InvV_InvP_LVP_HLSL(1);
+Define_SimpleLight_HLSL(2);
 
-Texture2D baseColorRoughnessMap: register(t0);
-Texture2D normalMetalnessMap   : register(t1);
-Texture2D iorMap               : register(t2);
-Texture2D depthMap             : register(t3);
-Texture2D shadowMap            : register(t4);
-SamplerState gbufferSampler    : register(s0);
+Texture2D<float4> baseColorRoughnessMap: register(t0);
+Texture2D<float4> normalMetalnessMap   : register(t1);
+Texture2D<float>  iorMap               : register(t2);
+Texture2D<float>  depthMap             : register(t3);
+Texture2D<float>  shadowMap            : register(t4);
+
+SamplerState gbufferSampler : register(s0);
 
 
 
@@ -82,32 +83,33 @@ inline float3 calcPointLight(float3 p, float3 n, float3 objectColor, float objec
 
 float4 ps_main(PSInput input) : SV_TARGET
 {
-	float4 baseColorRoughness = baseColorRoughnessMap.Sample(gbufferSampler, input.uv);
-	float4 normalMetalness    = normalMetalnessMap.Sample(gbufferSampler, input.uv);
+	const float4 baseColorRoughness = baseColorRoughnessMap.Sample(gbufferSampler, input.uv);
+	const float4 normalMetalness    = normalMetalnessMap.Sample(gbufferSampler, input.uv);
 
-	float3 color     = baseColorRoughness.xyz;
-	float3 n         = normalMetalness.xyz;
-	float  roughness = baseColorRoughness.w;
-	float  metalness = normalMetalness.w;
-	float  ior       = iorMap.Sample(gbufferSampler, input.uv).r;
-	float  depth     = depthMap.Sample(gbufferSampler, input.uv).r;
+	const float3 color     = baseColorRoughness.xyz;
+	const float  roughness = baseColorRoughness.w;
+	const float  metalness = normalMetalness.w;
+	const float  ior       = iorMap.Sample(gbufferSampler, input.uv).r;
+	const float3 f0        = calcF0FromIOR(ior)*(1.0-metalness)+color*metalness;
 
-	float4 viewPosition  = mul(float4(input.uv*2.0-1.0, depth, 1.0), invP);
-	float4 worldPosition = mul(viewPosition, invV);
-	float4 lpPosition    = mul(worldPosition, lvp);
-
-	const float3 f0 = calcF0FromIOR(ior)*(1.0-metalness)+color*metalness;
-
-	float3 outColor = calcDirectionalLight(worldPosition.xyz, n, color, roughness, f0, directionalLight.direction, directionalLight.color, cameraPosition);
+	const float3 n              = normalMetalness.xyz;
+	const float  depth          = depthMap.Sample(gbufferSampler, input.uv).r;
+	const float4 viewPosition4  = mul(float4(float2(input.uv.x*2.0-1.0, -input.uv.y*2.0+1.0), depth, 1.0), invP);
+	const float4 worldPosition4 = mul(viewPosition4, invV);
+	const float3 viewPosition   = viewPosition4.xyz/viewPosition4.w;
+	const float3 worldPosition  = worldPosition4.xyz/worldPosition4.w;
+	const float4 lpPosition     = mul(worldPosition4, lvp);
+	
+	float3 outColor = calcDirectionalLight(worldPosition, n, color, roughness, f0, directionalLight.direction, directionalLight.color, cameraPosition);
 	for (int i = 0; i < 1; ++i)
 	{
 		SimplePointLight pointLight = pointLights[i];
-		outColor += calcPointLight(worldPosition.xyz, n, color, roughness, f0, pointLight.position, pointLight.color, pointLight.Kclq, cameraPosition);
+		outColor += calcPointLight(worldPosition, n, color, roughness, f0, pointLight.position, pointLight.color, pointLight.Kclq, cameraPosition);
 	}
-
-	float2 shadowUV = float2(lpPosition.x/lpPosition.w*0.5+0.5, -lpPosition.y/lpPosition.w*0.5+0.5);
-	float lpDepth = shadowMap.Sample(gbufferSampler, shadowUV).r;
-	float cplpDepth = lpPosition.z/lpPosition.w;
+	
+	const float2 shadowUV = float2(lpPosition.x/lpPosition.w*0.5+0.5, -lpPosition.y/lpPosition.w*0.5+0.5);
+	const float lpDepth = shadowMap.Sample(gbufferSampler, shadowUV).r;
+	const float cplpDepth = lpPosition.z/lpPosition.w;
 	if (lpDepth+0.005 < cplpDepth)
 	{
 		outColor *= 0.5;
