@@ -21,8 +21,11 @@ private:
 	bool m_shouldRefreshDepthStencilBuffer;
 public:
 	static const std::string targetRenderingGroupName;
+private:
+	ForwardSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer, std::shared_ptr<cg::IDepthStencilTester> depthStencilTester, bool shouldRefreshRenderTarget, bool shouldRefreshDepthStencilBuffer);
 public:
-	ForwardSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer, std::shared_ptr<cg::IDepthStencilTester> depthStencilTester, bool shouldRefreshRenderTarget = true, bool shouldRefreshDepthStencilBuffer = true);
+	ForwardSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget);
+	ForwardSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::IDepthStencilTester> depthStencilTester, bool shouldRefreshRenderTarget = true, bool shouldRefreshDepthStencilBuffer = true);
 	virtual ~ForwardSampleRenderPipeline() = default;
 
 	void render(const cg::Scene& scene) override;
