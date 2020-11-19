@@ -29,6 +29,16 @@ ForwardSampleRenderPipeline::ForwardSampleRenderPipeline(std::shared_ptr<cg::IRe
 	m_shadowMapRenderingPass.initializeDepthStencilBuffer(m_shadowMap);
 }
 
+ForwardSampleRenderPipeline::ForwardSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget)
+	: ForwardSampleRenderPipeline(renderTarget, cg::API::shared.graphics()->createDepthStencilTester(cg::ComparisonFunction::greater, cg::ComparisonFunction::always, true, false, true))
+{
+}
+
+ForwardSampleRenderPipeline::ForwardSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::IDepthStencilTester> depthStencilTester, bool shouldRefreshRenderTarget, bool shouldRefreshDepthStencilBuffer)
+	: ForwardSampleRenderPipeline(renderTarget, cg::API::shared.graphics()->createDepthStencilBuffer(cg::System::getWindowInfo().getSize(), cg::TextureFormat::D32_FLOAT), depthStencilTester, true, true)
+{
+}
+
 void ForwardSampleRenderPipeline::render(const cg::Scene& scene)
 {
 	if (m_shouldRefreshRenderTarget)
