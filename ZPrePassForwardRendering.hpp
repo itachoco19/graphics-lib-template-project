@@ -1,7 +1,7 @@
 #pragma once
 #include "DepthRenderPipeline.hpp"
 #include "DepthPass.hpp"
-#include "ForwardRenderingRenderPipeline.hpp"
+#include "ForwardRenderPipeline.hpp"
 
 
 
@@ -12,9 +12,9 @@ class ZPrePassForwardRendering
 {
 private:
 	DepthPass m_zPass;
-	std::shared_ptr<ForwardRenderingRenderPipeline> m_forwardRenderingRenderPipeline;
+	std::shared_ptr<ForwardRenderPipeline> m_forwardRenderingRenderPipeline;
 public:
-	ZPrePassForwardRendering(const std::string& name, const DepthPass& zPass, std::shared_ptr<ForwardRenderingRenderPipeline> forwardRenderingRenderPipeline);
+	ZPrePassForwardRendering(const std::string& name, const DepthPass& zPass, std::shared_ptr<ForwardRenderPipeline> forwardRenderingRenderPipeline);
 	virtual ~ZPrePassForwardRendering() = default;
 
 	void render(const cg::Scene& scene) override;

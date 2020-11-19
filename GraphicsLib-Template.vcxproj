@@ -169,7 +169,7 @@
     <ClCompile Include="DefferedRenderingRenderPipeline.cpp" />
     <ClCompile Include="ImGuiCameraControllerInspector.cpp" />
     <ClCompile Include="ImGuiDrawableObjectInspector.cpp" />
-    <ClCompile Include="ForwardRenderingRenderPipeline.cpp" />
+    <ClCompile Include="ForwardRenderPipeline.cpp" />
     <ClCompile Include="ImGuiCameraJumpButton.cpp" />
     <ClCompile Include="ImGuiSceneLightSearchBar.cpp" />
     <ClCompile Include="ImGuiDrawableObjectMaterialInspector.cpp" />
@@ -216,7 +216,7 @@
     <ClInclude Include="ConstantWithImGuiComponents.hpp" />
     <ClInclude Include="DefferedRenderingRenderPipeline.hpp" />
     <ClInclude Include="ImGuiDrawableObjectInspector.hpp" />
-    <ClInclude Include="ForwardRenderingRenderPipeline.hpp" />
+    <ClInclude Include="ForwardRenderPipeline.hpp" />
     <ClInclude Include="IImGuiComponentsHolder.hpp" />
     <ClInclude Include="ImGuiCameraJumpButton.hpp" />
     <ClInclude Include="ImGuiCameraControllerInspector.hpp" />

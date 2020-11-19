@@ -13,7 +13,7 @@ const cg::RasterizationBasedRenderPipeline::TargetRenderingGroupNameList targetR
 
 
 ForwardSampleRenderPipeline::ForwardSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer, std::shared_ptr<cg::IDepthStencilTester> depthStencilTester, bool shouldRefreshRenderTarget, bool shouldRefreshDepthStencilBuffer)
-	: ForwardRenderingRenderPipeline("Test Render Pipeline", renderTarget, depthStencilBuffer),
+	: ForwardRenderPipeline("Test Render Pipeline", renderTarget, depthStencilBuffer),
 	  m_shadowMap(cg::API::shared.graphics()->createDepthStencilBuffer(cg::System::getWindowInfo().getSize(), cg::TextureFormat::D32_FLOAT, renderTarget->getMSAASampleCount(), renderTarget->getMSAAQualityLevel())),
 	  m_shadowMapSampler(cg::API::shared.graphics()->createTextureSampler([]() 
       {
