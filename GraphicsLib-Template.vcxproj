@@ -156,11 +156,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DefferedSampleRenderPipeline.cpp" />
     <ClCompile Include="FullscreenDepthTextureOrthographicRenderPipeline.cpp" />
     <ClCompile Include="FullscreenDepthTexturePerspectiveRenderPipeine.cpp" />
     <ClCompile Include="FullscreenDepthTextureRenderPipeline.cpp" />
     <ClCompile Include="FullscreenTextureRenderPipeline.cpp" />
-    <ClCompile Include="GeometryPass.cpp" />
     <ClCompile Include="GeometryRenderPipeline.cpp" />
     <ClCompile Include="ImGuiGraphicsLibDefaultInspector.cpp" />
     <ClCompile Include="ImGuiCameraInspector.cpp" />
@@ -191,10 +191,10 @@
     <ClCompile Include="SphereWithImGuiComponents.cpp" />
     <ClCompile Include="ImGuiTransformInspector.cpp" />
     <ClCompile Include="ObjectLookAtControl.cpp" />
-    <ClCompile Include="SampleRenderPipeline.cpp" />
+    <ClCompile Include="ForwardSampleRenderPipeline.cpp" />
     <ClCompile Include="DepthPass.cpp" />
     <ClCompile Include="ZPrePassForwardRendering.cpp" />
-    <ClCompile Include="ZPrePassSampleRenderPipeline.cpp" />
+    <ClCompile Include="ForwardZPrePassSampleRenderPipeline.cpp" />
     <ClCompile Include="DepthRenderPipeline.cpp" />
     <ClCompile Include="FullscreenQuad.cpp" />
     <ClCompile Include="FullscreenQuadRenderPipeline.cpp" />
@@ -202,10 +202,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoxWithImGuiComponents.hpp" />
+    <ClInclude Include="DefferedSampleRenderPipeline.hpp" />
     <ClInclude Include="FullscreenDepthTexturePerspectiveRenderPipeline.hpp" />
     <ClInclude Include="FullscreenDepthTextureOrthographicRenderPipeline.hpp" />
     <ClInclude Include="FullscreenDepthTextureRenderPipeline.hpp" />
-    <ClInclude Include="GeometryPass.hpp" />
     <ClInclude Include="GeometryRenderPipeline.hpp" />
     <ClInclude Include="ImGuiGraphicsLibDefaultInspector.hpp" />
     <ClInclude Include="ObjectControllingMethod.hpp" />
@@ -237,9 +237,9 @@
     <ClInclude Include="SampleShadingRenderPipeline.hpp" />
     <ClInclude Include="SphereWithImGuiComponents.hpp" />
     <ClInclude Include="ImGuiTransformInspector.hpp" />
-    <ClInclude Include="SampleRenderPipeline.hpp" />
+    <ClInclude Include="ForwardSampleRenderPipeline.hpp" />
     <ClInclude Include="DepthPass.hpp" />
-    <ClInclude Include="ZPrePassSampleRenderPipeline.hpp" />
+    <ClInclude Include="ForwardZPrePassSampleRenderPipeline.hpp" />
     <ClInclude Include="DepthRenderPipeline.hpp" />
     <ClInclude Include="FullscreenQuad.hpp" />
     <ClInclude Include="DrawableObjectCreator.hpp" />
@@ -270,10 +270,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Position3Normal3InOut.vsh">
+    <None Include="SamplePosition3Normal3.vsh">
       <FileType>Document</FileType>
     </None>
-    <None Include="SimpleShading.psh">
+    <None Include="SampleShading.psh">
       <FileType>Document</FileType>
     </None>
   </ItemGroup>
@@ -297,6 +297,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="FullscreenDepthTextureOrthographic.psh">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SampleGeometryPass.psh">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="SampleGeometryPass.vsh">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SampleLightingPass.psh">
       <FileType>Document</FileType>
     </None>
   </ItemGroup>

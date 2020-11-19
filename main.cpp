@@ -8,7 +8,7 @@
 
 #include "ImGuiGraphicsLibDefaultInspector.hpp"
 
-#include "SampleRenderPipeline.hpp"
+#include "ForwardSampleRenderPipeline.hpp"
 
 #include "SimplePBRMaterialConstant.hpp"
 #include "DefferedSampleRenderPipeline.hpp"

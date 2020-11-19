@@ -7,7 +7,7 @@
 
 
 
-class SampleRenderPipeline
+class ForwardSampleRenderPipeline
 	: public ForwardRenderingRenderPipeline
 {
 private:
@@ -22,8 +22,8 @@ private:
 public:
 	static const std::string targetRenderingGroupName;
 public:
-	SampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer, std::shared_ptr<cg::IDepthStencilTester> depthStencilTester, bool shouldRefreshRenderTarget = true, bool shouldRefreshDepthStencilBuffer = true);
-	virtual ~SampleRenderPipeline() = default;
+	ForwardSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer, std::shared_ptr<cg::IDepthStencilTester> depthStencilTester, bool shouldRefreshRenderTarget = true, bool shouldRefreshDepthStencilBuffer = true);
+	virtual ~ForwardSampleRenderPipeline() = default;
 
 	void render(const cg::Scene& scene) override;
 	void render() override;
