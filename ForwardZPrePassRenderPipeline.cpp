@@ -1,10 +1,10 @@
-#include "ZPrePassForwardRendering.hpp"
+#include "ForwardZPrePassRenderPipeline.hpp"
 
 
 
 
 
-ZPrePassForwardRendering::ZPrePassForwardRendering(const std::string& name, const DepthPass& zPass, std::shared_ptr<ForwardRenderPipeline> forwardRenderingRenderPipeline)
+ForwardZPrePassRenderPipeline::ForwardZPrePassRenderPipeline(const std::string& name, const DepthPass& zPass, std::shared_ptr<ForwardRenderPipeline> forwardRenderingRenderPipeline)
 	: RenderPipelineWithImGuiComponents(name),
 	  m_zPass(zPass),
 	  m_forwardRenderingRenderPipeline(forwardRenderingRenderPipeline)
@@ -12,7 +12,7 @@ ZPrePassForwardRendering::ZPrePassForwardRendering(const std::string& name, cons
 	m_zPass.initializeDepthStencilBuffer(m_forwardRenderingRenderPipeline->getDepthStencilBuffer());
 }
 
-void ZPrePassForwardRendering::render(const cg::Scene& scene)
+void ForwardZPrePassRenderPipeline::render(const cg::Scene& scene)
 {
 	m_forwardRenderingRenderPipeline->getRenderTarget()->refresh();
 	m_forwardRenderingRenderPipeline->getDepthStencilBuffer()->refresh();
@@ -21,11 +21,11 @@ void ZPrePassForwardRendering::render(const cg::Scene& scene)
 	m_forwardRenderingRenderPipeline->render(scene);
 }
 
-void ZPrePassForwardRendering::render()
+void ForwardZPrePassRenderPipeline::render()
 {
 }
 
-void ZPrePassForwardRendering::drawImGuiComponents()
+void ForwardZPrePassRenderPipeline::drawImGuiComponents()
 {
 	m_zPass.drawImGuiComponents();
 	m_forwardRenderingRenderPipeline->drawImGuiComponents();

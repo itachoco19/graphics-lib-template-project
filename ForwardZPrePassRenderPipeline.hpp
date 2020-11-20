@@ -7,15 +7,15 @@
 
 
 
-class ZPrePassForwardRendering
+class ForwardZPrePassRenderPipeline
 	: public RenderPipelineWithImGuiComponents
 {
 private:
 	DepthPass m_zPass;
 	std::shared_ptr<ForwardRenderPipeline> m_forwardRenderingRenderPipeline;
 public:
-	ZPrePassForwardRendering(const std::string& name, const DepthPass& zPass, std::shared_ptr<ForwardRenderPipeline> forwardRenderingRenderPipeline);
-	virtual ~ZPrePassForwardRendering() = default;
+	ForwardZPrePassRenderPipeline(const std::string& name, const DepthPass& zPass, std::shared_ptr<ForwardRenderPipeline> forwardRenderingRenderPipeline);
+	virtual ~ForwardZPrePassRenderPipeline() = default;
 
 	void render(const cg::Scene& scene) override;
 	void render() override;

@@ -1,12 +1,12 @@
 #pragma once
-#include "ZPrePassForwardRendering.hpp"
+#include "ForwardZPrePassRenderPipeline.hpp"
 
 
 
 
 
 class ForwardZPrePassSampleRenderPipeline
-	: public ZPrePassForwardRendering
+	: public ForwardZPrePassRenderPipeline
 {
 public:
 	ForwardZPrePassSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget);
