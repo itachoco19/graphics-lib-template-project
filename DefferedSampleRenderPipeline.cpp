@@ -40,7 +40,7 @@ const auto createMRT = [](const cpp::Vector2D<int>& lightingPassRenderTargetSize
 const auto constructGeometryPass = [](std::shared_ptr<cg::IRenderTarget> lightingPassRenderTarget, std::shared_ptr<cg::IMultipleRenderTarget> geometryPassMRT, std::shared_ptr<cg::IDepthStencilBuffer> geometryPassDepthStencilBuffer, std::shared_ptr<cg::IDepthStencilBuffer> shadowMap)
 {
 	auto geometryPass = 
-	DefferedRenderingRenderPipeline::GeometryPass
+	DefferedRenderPipeline::GeometryPass
 	(
 		"Sample Geometry Pass",
 		{
@@ -121,11 +121,11 @@ const auto constructGeometryPass = [](std::shared_ptr<cg::IRenderTarget> lightin
 
 
 DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> lightingPassRenderTarget, const GeometryPass& geometryPass, std::shared_ptr<cg::ITextureSampler> gbufferSampler, std::shared_ptr<cg::IDepthStencilBuffer> shadowMap)
-	: DefferedRenderingRenderPipeline
+	: DefferedRenderPipeline
 	  (
 		  "Deffered Sample Render Pipeline",
 		  geometryPass,
-		  DefferedRenderingRenderPipeline::LightingPass
+		  DefferedRenderPipeline::LightingPass
 		  (
 			  "Sample Lighting Pass",
 			  lightingPassRenderTarget,

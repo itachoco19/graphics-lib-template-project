@@ -166,7 +166,7 @@
     <ClCompile Include="ImGuiCameraInspector.cpp" />
     <ClCompile Include="ConstantWithImGuiComponents.cpp" />
     <ClCompile Include="BoxWithImGuiComponents.cpp" />
-    <ClCompile Include="DefferedRenderingRenderPipeline.cpp" />
+    <ClCompile Include="DefferedRenderPipeline.cpp" />
     <ClCompile Include="ImGuiCameraControllerInspector.cpp" />
     <ClCompile Include="ImGuiDrawableObjectInspector.cpp" />
     <ClCompile Include="ForwardRenderPipeline.cpp" />
@@ -214,7 +214,7 @@
     <ClInclude Include="ObjectLookAtControl.hpp" />
     <ClInclude Include="ImGuiCameraInspector.hpp" />
     <ClInclude Include="ConstantWithImGuiComponents.hpp" />
-    <ClInclude Include="DefferedRenderingRenderPipeline.hpp" />
+    <ClInclude Include="DefferedRenderPipeline.hpp" />
     <ClInclude Include="ImGuiDrawableObjectInspector.hpp" />
     <ClInclude Include="ForwardRenderPipeline.hpp" />
     <ClInclude Include="IImGuiComponentsHolder.hpp" />
