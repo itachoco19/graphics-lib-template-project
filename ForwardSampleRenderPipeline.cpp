@@ -5,7 +5,7 @@
 
 
 
-const std::string ForwardSampleRenderPipeline::targetRenderingGroupName = "SimpleShading";
+const std::string ForwardSampleRenderPipeline::targetRenderingGroupName = "Sample";
 const cg::RasterizationBasedRenderPipeline::TargetRenderingGroupNameList targetRenderingGroupNameList = { ForwardSampleRenderPipeline::targetRenderingGroupName };
 
 
