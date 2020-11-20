@@ -7,7 +7,7 @@
 
 
 
-class DefferedRenderingRenderPipeline
+class DefferedRenderPipeline
 	: public RenderPipelineWithImGuiComponents
 {
 public:
@@ -48,6 +48,6 @@ protected:
 	[[nodiscard]] GeometryPass accessToGeometryPass() const noexcept;
 	[[nodiscard]] LightingPass accessToLightingPass() const noexcept;
 public:
-	DefferedRenderingRenderPipeline(const std::string& name, const GeometryPass& geometryPass, const LightingPass& lightingPass);
-	virtual ~DefferedRenderingRenderPipeline() = default;
+	DefferedRenderPipeline(const std::string& name, const GeometryPass& geometryPass, const LightingPass& lightingPass);
+	virtual ~DefferedRenderPipeline() = default;
 };

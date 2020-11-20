@@ -1,5 +1,5 @@
 #pragma once
-#include "DefferedRenderingRenderPipeline.hpp"
+#include "DefferedRenderPipeline.hpp"
 #include "FullscreenTextureRenderPipeline.hpp"
 #include "FullscreenDepthTextureRenderPipeline.hpp"
 #include "DepthPass.hpp"
@@ -9,7 +9,7 @@
 
 
 class DefferedSampleRenderPipeline
-	: public DefferedRenderingRenderPipeline
+	: public DefferedRenderPipeline
 {
 private:
 	std::shared_ptr<cg::IDepthStencilBuffer> m_shadowMap;
