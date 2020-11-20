@@ -193,7 +193,7 @@
     <ClCompile Include="ObjectLookAtControl.cpp" />
     <ClCompile Include="ForwardSampleRenderPipeline.cpp" />
     <ClCompile Include="DepthPass.cpp" />
-    <ClCompile Include="ZPrePassForwardRendering.cpp" />
+    <ClCompile Include="ForwardZPrePassRenderPipeline.cpp" />
     <ClCompile Include="ForwardZPrePassSampleRenderPipeline.cpp" />
     <ClCompile Include="DepthRenderPipeline.cpp" />
     <ClCompile Include="FullscreenQuad.cpp" />
@@ -244,7 +244,7 @@
     <ClInclude Include="FullscreenQuad.hpp" />
     <ClInclude Include="DrawableObjectCreator.hpp" />
     <ClInclude Include="FullscreenQuadRenderPipeline.hpp" />
-    <ClInclude Include="ZPrePassForwardRendering.hpp" />
+    <ClInclude Include="ForwardZPrePassRenderPipeline.hpp" />
     <ClInclude Include="FullscreenTextureRenderPipeline.hpp" />
     <ClInclude Include="ShaderConstant.h" />
     <ClInclude Include="ShaderConstant.hpp" />

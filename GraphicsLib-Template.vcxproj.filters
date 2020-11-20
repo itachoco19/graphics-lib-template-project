@@ -88,9 +88,6 @@
     <ClInclude Include="RenderPipelineSRTWithImGuiComponents.hpp">
       <Filter>HeaderFiles\ImGui\ComponentsHolder\RenderPipeline</Filter>
     </ClInclude>
-    <ClInclude Include="ZPrePassForwardRendering.hpp">
-      <Filter>HeaderFiles\RenderPipeline\Base\ZPrePass</Filter>
-    </ClInclude>
     <ClInclude Include="DefferedRenderingRenderPipeline.hpp">
       <Filter>HeaderFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline</Filter>
     </ClInclude>
@@ -147,6 +144,9 @@
     </ClInclude>
     <ClInclude Include="ForwardRenderPipeline.hpp">
       <Filter>HeaderFiles\RenderPipeline\Base\ForwardRenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardZPrePassRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Base\ZPrePass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -497,9 +497,6 @@
     <ClCompile Include="DefferedRenderingRenderPipeline.cpp">
       <Filter>SourceFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline</Filter>
     </ClCompile>
-    <ClCompile Include="ZPrePassForwardRendering.cpp">
-      <Filter>SourceFiles\RenderPipeline\Base\ZPrePassForwardRendering</Filter>
-    </ClCompile>
     <ClCompile Include="FullscreenQuadRenderPipeline.cpp">
       <Filter>SourceFiles\RenderPipeline\Base\FullscreenQuadRenderPipeline</Filter>
     </ClCompile>
@@ -553,6 +550,9 @@
     </ClCompile>
     <ClCompile Include="ForwardRenderPipeline.cpp">
       <Filter>SourceFiles\RenderPipeline\Base\ForwardRenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="ForwardZPrePassRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Base\ZPrePassForwardRendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
