@@ -30,12 +30,12 @@ ForwardSampleRenderPipeline::ForwardSampleRenderPipeline(std::shared_ptr<cg::IRe
 }
 
 ForwardSampleRenderPipeline::ForwardSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget)
-	: ForwardSampleRenderPipeline(renderTarget, cg::API::shared.graphics()->createDepthStencilTester(cg::ComparisonFunction::greater, cg::ComparisonFunction::always, true, false, true))
+	: ForwardSampleRenderPipeline(renderTarget, cg::API::shared.graphics()->createDepthStencilTester(cg::ComparisonFunction::less, cg::ComparisonFunction::always, true, false, true))
 {
 }
 
 ForwardSampleRenderPipeline::ForwardSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::IDepthStencilTester> depthStencilTester, bool shouldRefreshRenderTarget, bool shouldRefreshDepthStencilBuffer)
-	: ForwardSampleRenderPipeline(renderTarget, cg::API::shared.graphics()->createDepthStencilBuffer(cg::System::getWindowInfo().getSize(), cg::TextureFormat::D32_FLOAT), depthStencilTester, true, true)
+	: ForwardSampleRenderPipeline(renderTarget, cg::API::shared.graphics()->createDepthStencilBuffer(renderTarget->getSize(), cg::TextureFormat::D32_FLOAT), depthStencilTester, true, true)
 {
 }
 
