@@ -7,6 +7,7 @@
 
 
 const std::string DefferedSampleRenderPipeline::targetRenderingGroupName = "Sample";
+const cg::RasterizationBasedRenderPipeline::TargetRenderingGroupNameList targetRenderingGroupNameList = { DefferedSampleRenderPipeline::targetRenderingGroupName };
 
 
 
@@ -205,7 +206,7 @@ DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::I
 	  (
 		  "Shadow Map Rendering Pass", 
 		  {
-			  std::make_shared<Position3Normal3DepthRenderPipeline>(cg::RasterizationBasedRenderPipeline::TargetRenderingGroupNameList{DefferedSampleRenderPipeline::targetRenderingGroupName})
+			  std::make_shared<Position3Normal3DepthRenderPipeline>(targetRenderingGroupNameList)
 		  }
 	  ),
 	  m_shadowMap(shadowMap)
@@ -213,7 +214,7 @@ DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::I
 	m_shadowMapRenderingPass.initializeDepthStencilBuffer(shadowMap);
 }
 DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> lightingPassRenderTarget, std::shared_ptr<cg::IMultipleRenderTarget> geometryPassMRT, std::shared_ptr<cg::IDepthStencilBuffer> geometryPassDepthStencilBuffer, std::shared_ptr<cg::ITextureSampler> gbufferSampler, std::shared_ptr<cg::IDepthStencilBuffer> shadowMap)
-	: DefferedSampleRenderPipeline(lightingPassRenderTarget, constructGeometryPass({ DefferedSampleRenderPipeline::targetRenderingGroupName }, lightingPassRenderTarget, geometryPassMRT, geometryPassDepthStencilBuffer, shadowMap), gbufferSampler, shadowMap)
+	: DefferedSampleRenderPipeline(lightingPassRenderTarget, constructGeometryPass(targetRenderingGroupNameList, lightingPassRenderTarget, geometryPassMRT, geometryPassDepthStencilBuffer, shadowMap), gbufferSampler, shadowMap)
 {
 }
 
