@@ -8,10 +8,11 @@
 
 #include "ImGuiGraphicsLibDefaultInspector.hpp"
 
-#include "SampleRenderPipeline.hpp"
+#include "ForwardSampleRenderPipeline.hpp"
+#include "ForwardZPrePassSampleRenderPipeline.hpp"
 
 #include "SimplePBRMaterialConstant.hpp"
-
+#include "DefferedSampleRenderPipeline.hpp"
 
 
 
@@ -38,14 +39,24 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
 
 	// Setup render target
 	auto mainRenderTarget = cg::MainRenderTarget::shared.get();
-	auto depthStencilBuffer = cg::API::shared.graphics()->createDepthStencilBuffer(windowSize.x, windowSize.y, cg::TextureFormat::D32_FLOAT, mainRenderTarget->getMSAASampleCount(), mainRenderTarget->getMSAAQualityLevel());
 
 
 
 	// Setup render pipeline
-	auto renderPipeline = std::make_shared<SampleRenderPipeline>(mainRenderTarget, depthStencilBuffer, cg::API::shared.graphics()->createDepthStencilTester(cg::ComparisonFunction::less, cg::ComparisonFunction::always, true, false, true));
+	std::shared_ptr<RenderPipelineWithImGuiComponents> renderPipeline;
+	std::string renderingGroupName;
+	try
+	{
+		renderPipeline = std::make_shared<DefferedSampleRenderPipeline>(mainRenderTarget);
+		renderingGroupName = DefferedSampleRenderPipeline::targetRenderingGroupName;
 
-
+		//renderPipeline = std::make_shared<ForwardSampleRenderPipeline>(mainRenderTarget);
+		//renderingGroupName = ForwardSampleRenderPipeline::targetRenderingGroupName;
+	}
+	catch (cpp::com_runtime_error e)
+	{
+		Log(e.message());
+	}
 
 	// Prepare material
 	auto materialConstant = std::make_shared<SimplePBRMaterialConstant>();
@@ -57,30 +68,29 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
 	materialConstantDict.emplace(cg::ShaderStage::ps, materialConstant);
 	auto material = cg::Material(materialConstantDict);
 
-	auto planeMaterial  = material.clone();
+	auto planeMaterial = material.clone();
 	auto sphereMaterial = material.clone();
-	auto boxMaterial    = material.clone();
+	auto boxMaterial = material.clone();
 
-	std::dynamic_pointer_cast<SimplePBRMaterialConstant>(planeMaterial.getConstantP(cg::ShaderStage::ps))-> changeColor(1.0f, 1.0f,  1.0f);
+	std::dynamic_pointer_cast<SimplePBRMaterialConstant>(planeMaterial.getConstantP(cg::ShaderStage::ps))->changeColor(1.0f, 1.0f, 1.0f);
 	std::dynamic_pointer_cast<SimplePBRMaterialConstant>(sphereMaterial.getConstantP(cg::ShaderStage::ps))->changeColor(0.9f, 0.05f, 0.5f);
-	std::dynamic_pointer_cast<SimplePBRMaterialConstant>(boxMaterial.getConstantP(cg::ShaderStage::ps))->   changeColor(0.3f, 0.3f,  0.8f);
+	std::dynamic_pointer_cast<SimplePBRMaterialConstant>(boxMaterial.getConstantP(cg::ShaderStage::ps))->changeColor(0.3f, 0.3f, 0.8f);
 
 
 
 	// Prepare objects
 	auto plane = DrawableObjectCreator::createBox<vsinput::Position3Normal3>("Plane", 5.0f, 0.1f, 5.0f, planeMaterial);
-	auto sphere = DrawableObjectCreator::createSphere<vsinput::Position3Normal3>("Sphere", 0.75f*0.5f, 20, 20, sphereMaterial);
+	auto sphere = DrawableObjectCreator::createSphere<vsinput::Position3Normal3>("Sphere", 0.75f * 0.5f, 20, 20, sphereMaterial);
 	auto box = DrawableObjectCreator::createBox<vsinput::Position3Normal3>("Box", 0.75f, 0.75f, 0.75f, boxMaterial);
-		
-	plane->getTransformRef().changePosition( 0.0f, -0.05f,      0.0f);
-	sphere->getTransformRef().changePosition(0.75f, 0.75f*0.5f, 0.0f);
-	box->getTransformRef().changePosition(  -0.75f, 0.75f*0.5f, 0.0f);
 
-	const auto renderingGroupName = SampleRenderPipeline::targetRenderingGroupName;
+	plane->getTransformRef().changePosition(0.0f, -0.05f, 0.0f);
+	sphere->getTransformRef().changePosition(0.75f, 0.75f * 0.5f, 0.0f);
+	box->getTransformRef().changePosition(-0.75f, 0.75f * 0.5f, 0.0f);
+
 	plane->moveTo(renderingGroupName);
 	sphere->moveTo(renderingGroupName);
 	box->moveTo(renderingGroupName);
-	
+
 
 
 	// Setup Scene
@@ -117,22 +127,22 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
 	auto& keyLightCameraProjection = keyLight->perspective.projection;
 
 	const auto keyLightDirection = cpp::Vector3D<float>(0.0f, -0.5f, 1.0f);
-	auto keyLightCameraPosition = -3.0f*keyLightDirection;
-		
+	auto keyLightCameraPosition = -3.0f * keyLightDirection;
+
 	keyLight->accessToColorParam().changeColor(0.9f, 0.9f, 0.9f);
-		
+
 	keyLightCameraProjection.changeType(cg::ProjectionType::orthographic3D);
-	keyLightCameraProjection.changeViewSize(2.5f*aspect, 2.5f);
+	keyLightCameraProjection.changeViewSize(2.5f * aspect, 2.5f);
 	keyLightCameraProjection.changeNearZ(0.001f);
 	keyLightCameraProjection.changeFarZ(10.0f);
-		
+
 	keyLightCameraTransform.changeRotationMethod(cg::RotationMethod::directionBase);
 	keyLightCameraTransform.changeDirectionWorld(keyLightDirection);
 	keyLightCameraTransform.changeUpWorld(0.0f, 1.0f, 0.0f);
 	keyLightCameraTransform.changePosition(keyLightCameraPosition);
-		
+
 	scene.addLight(keyLight);
-		
+
 
 
 	// Setup back light
