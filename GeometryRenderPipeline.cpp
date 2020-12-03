@@ -43,7 +43,3 @@ void GeometryRenderPipeline::initializeDepthStencilBuffer(std::shared_ptr<cg::ID
 {
 	m_depthStencilBuffer = depthStencilBuffer;
 }
-
-void GeometryRenderPipeline::drawImGuiComponents()
-{
-}
