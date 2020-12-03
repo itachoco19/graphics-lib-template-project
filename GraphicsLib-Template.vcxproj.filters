@@ -148,6 +148,9 @@
     <ClInclude Include="DefferedRenderPipeline.hpp">
       <Filter>HeaderFiles\RenderPipeline\Base\DefferedRenderPipeline</Filter>
     </ClInclude>
+    <ClInclude Include="SampleGeometryRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Sample\Deffered\GeometryRenderPipeline</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="HeaderFiles">
@@ -423,6 +426,12 @@
     <Filter Include="HeaderFiles\RenderPipeline\Base\DefferedRenderPipeline\GeometryRenderPipeline">
       <UniqueIdentifier>{72932901-cd3f-4658-86d7-5066dc6c02c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Sample\Deffered\SampleGeometryRenderPipeline">
+      <UniqueIdentifier>{2e2ab760-9c7d-48b6-8108-16ce4fd9399a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline\Sample\Deffered\GeometryRenderPipeline">
+      <UniqueIdentifier>{9bb84450-ef1e-463a-bc84-c5de5832437b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FullscreenQuad.cpp">
@@ -553,6 +562,9 @@
     </ClCompile>
     <ClCompile Include="DefferedRenderPipeline.cpp">
       <Filter>SourceFiles\RenderPipeline\Base\DefferedRenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleGeometryRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Sample\Deffered\SampleGeometryRenderPipeline</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
