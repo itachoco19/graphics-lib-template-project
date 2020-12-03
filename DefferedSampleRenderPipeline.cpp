@@ -193,4 +193,15 @@ void DefferedSampleRenderPipeline::render()
 
 void DefferedSampleRenderPipeline::drawImGuiComponents()
 {
+	if (ImGui::TreeNode(name().c_str()))
+	{
+		if (ImGui::TreeNode("Geometry Pass"))
+		{
+			accessToGeometryPass().drawImGuiComponents();
+
+			ImGui::TreePop();
+		}
+
+		ImGui::TreePop();
+	}
 }
