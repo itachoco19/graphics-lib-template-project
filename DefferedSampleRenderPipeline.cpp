@@ -1,6 +1,7 @@
 #include "DefferedSampleRenderPipeline.hpp"
 #include "SimpleDirectionalLight.hpp"
 #include "SimplePointLight.hpp"
+#include "SampleGeometryRenderPipeline.hpp"
 
 
 
@@ -45,64 +46,12 @@ const auto constructGeometryPass = [](const cg::RasterizationBasedRenderPipeline
 	(
 		"Sample Geometry Pass",
 		{
-			std::make_shared<GeometryRenderPipeline>
+			std::make_shared<SampleGeometryRenderPipeline>
 			(
-				"Sample Geometry Render Pipeline",
-				cg::GBuffer
-				(
-					{
-						cg::GBufferContent("BaseColorRoughness", geometryPassMRT->getRenderingResult(0)),
-						cg::GBufferContent("NormalMetalness",    geometryPassMRT->getRenderingResult(1)),
-						cg::GBufferContent("IOR",                geometryPassMRT->getRenderingResult(2)),
-						cg::GBufferContent("Depth",              geometryPassDepthStencilBuffer->getDepthBufferTexture()),
-						cg::GBufferContent("ShadowMap",          shadowMap->getDepthBufferTexture())
-					}
-				),
-				targetRenderingGroupNameList,
-				std::make_shared<cg::MaterialConstantBuffer>
-				(
-					cg::MaterialConstantBuffer::BufferDict
-					{
-						{
-							cg::ShaderStage::ps,
-							std::make_shared<cg::MaterialConstantBuffer::ElementBuffer>
-							(
-								cg::MaterialConstantBuffer::ElementBuffer(sizeof(constant::SimplePBRMaterial))
-							)
-						}
-					}
-				),
-				std::make_shared<cg::TransformConstantBuffer>
-				(
-					cg::TransformConstantBuffer::BufferDict
-					{
-						{
-							cg::ShaderStage::vs,
-							std::make_shared<cg::TransformConstantBuffer::ElementBuffer>
-							(
-								cg::TransformConstantBuffer::ElementBuffer::constructor<constant::TransformWVP_N>
-								(
-									[](constant::TransformWVP_N& data, const cg::Scene& s, const cg::Transform& t, const cg::Camera& c)
-									{
-										cg::TransformConstantBufferHelper::storeWVP(&data.wvp, t, c);
-										cg::TransformConstantBufferHelper::storeN(&data.n, t);
-									}
-								)
-							)
-						}
-					}
-				),
-				cg::RasterizationBasedRenderPipeline::ShaderDict
-				{
-					{
-						cg::ShaderStage::vs,
-						cg::ShaderPool::shared.createFromFileAndAdd(cg::ShaderStage::vs, "SampleGeometryPass.vsh", "SampleGeometryPass.vsh", "vs_main", "vs_4_0")
-					},
-					{
-						cg::ShaderStage::ps,
-						cg::ShaderPool::shared.createFromFileAndAdd(cg::ShaderStage::ps, "SampleGeometryPass.psh", "SampleGeometryPass.psh", "ps_main", "ps_4_0")
-					}
-				}
+				geometryPassMRT,
+				geometryPassDepthStencilBuffer,
+				shadowMap,				
+				targetRenderingGroupNameList
 			)
 		}
 	);
