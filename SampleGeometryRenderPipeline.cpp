@@ -1,4 +1,5 @@
 #include "SampleGeometryRenderPipeline.hpp"
+#include "SampleGBuffer.hpp"
 
 
 
@@ -8,16 +9,7 @@ SampleGeometryRenderPipeline::SampleGeometryRenderPipeline(std::shared_ptr<cg::I
 	: GeometryRenderPipeline
 	  (
 	      "Sample Geometry Render Pipeline",
-		  cg::GBuffer
-		  (
-			  {
-				  cg::GBufferContent("BaseColor+Roughness", mrt->getRenderingResult(0)),
-				  cg::GBufferContent("Normal+Metalness",    mrt->getRenderingResult(1)),
-				  cg::GBufferContent("IOR",                mrt->getRenderingResult(2)),
-				  cg::GBufferContent("Depth",              depthStencilBuffer->getDepthBufferTexture()),
-				  cg::GBufferContent("ShadowMap",          shadowMap->getDepthBufferTexture())
-			  }
-		  ),
+		  SampleGBuffer(mrt->getRenderingResult(0), mrt->getRenderingResult(1), mrt->getRenderingResult(2), depthStencilBuffer->getDepthBufferTexture(), shadowMap->getDepthBufferTexture()),
 		  targetRenderingGroupNameList,
 		  std::make_shared<cg::MaterialConstantBuffer>
 		  (
