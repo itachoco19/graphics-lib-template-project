@@ -43,3 +43,27 @@ void GeometryRenderPipeline::initializeDepthStencilBuffer(std::shared_ptr<cg::ID
 {
 	m_depthStencilBuffer = depthStencilBuffer;
 }
+
+void GeometryRenderPipeline::drawImGuiComponents()
+{
+	if (ImGui::TreeNode("GBuffer"))
+	{
+		std::string bufferName = "";
+		const auto contents = m_GBuffer.getAllContents();
+
+		for (const auto content : contents)
+		{
+			if (ImGui::Button(content.name.c_str()))
+			{
+				bufferName = content.name;
+			}
+		}
+		if (bufferName == "") { return; }
+
+		const auto image = m_GBuffer.get(bufferName);
+		const auto imageSize = image->getSize()/5;
+		ImGui::Image(image, ImVec2(imageSize.x, imageSize.y));
+
+		ImGui::TreePop();
+	}
+}

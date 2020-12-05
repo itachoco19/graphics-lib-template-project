@@ -22,4 +22,6 @@ public:
 
 	void initializeMultipleRenderTarget(std::shared_ptr<cg::IMultipleRenderTarget> mrt);
 	void initializeDepthStencilBuffer(std::shared_ptr<cg::IDepthStencilBuffer> depthStenciBuffer);
+
+	void drawImGuiComponents() override;
 };
