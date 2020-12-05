@@ -151,6 +151,9 @@
     <ClInclude Include="SampleGeometryRenderPipeline.hpp">
       <Filter>HeaderFiles\RenderPipeline\Sample\Deffered\GeometryRenderPipeline</Filter>
     </ClInclude>
+    <ClInclude Include="SampleGBuffer.hpp">
+      <Filter>SourceFiles\RenderPipeline\Sample\Deffered\GBuffer\SampleGBuffer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="HeaderFiles">
@@ -432,6 +435,12 @@
     <Filter Include="HeaderFiles\RenderPipeline\Sample\Deffered\GeometryRenderPipeline">
       <UniqueIdentifier>{9bb84450-ef1e-463a-bc84-c5de5832437b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Sample\Deffered\GBuffer">
+      <UniqueIdentifier>{b05f9eaa-a187-42d0-9067-6b1b38f00f34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Sample\Deffered\GBuffer\SampleGBuffer">
+      <UniqueIdentifier>{0f6db4f9-57dd-4904-924d-29ae8089afb3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FullscreenQuad.cpp">
@@ -566,6 +575,7 @@
     <ClCompile Include="SampleGeometryRenderPipeline.cpp">
       <Filter>SourceFiles\RenderPipeline\Sample\Deffered\SampleGeometryRenderPipeline</Filter>
     </ClCompile>
+    <ClCompile Include="SampleGBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ShaderConstant.hlsl">

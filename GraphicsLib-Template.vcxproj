@@ -183,6 +183,7 @@
     <ClCompile Include="RenderPipelineWithImGuiComponents.cpp" />
     <ClCompile Include="ImGuiSceneInspector.cpp" />
     <ClCompile Include="ImGuiSceneDrawableObjectInspector.cpp" />
+    <ClCompile Include="SampleGBuffer.cpp" />
     <ClCompile Include="SampleGeometryRenderPipeline.cpp" />
     <ClCompile Include="ShapeWithImGuiComponents.cpp" />
     <ClCompile Include="SimpleDirectionalLight.cpp" />
@@ -231,6 +232,7 @@
     <ClInclude Include="RenderPipelineWithImGuiComponents.hpp" />
     <ClInclude Include="ImGuiSceneInspector.hpp" />
     <ClInclude Include="ImGuiSceneDrawableObjectInspector.hpp" />
+    <ClInclude Include="SampleGBuffer.hpp" />
     <ClInclude Include="SampleGeometryRenderPipeline.hpp" />
     <ClInclude Include="ShapeWithImGuiComponents.hpp" />
     <ClInclude Include="SimpleDirectionalLight.hpp" />
