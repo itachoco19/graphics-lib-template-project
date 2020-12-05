@@ -2,7 +2,7 @@
 #include "SimpleDirectionalLight.hpp"
 #include "SimplePointLight.hpp"
 #include "SampleGeometryRenderPipeline.hpp"
-
+#include "SampleGBuffer.hpp"
 
 
 
@@ -141,11 +141,11 @@ DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::I
 				  auto locationDict = cg::ShaderPool::shared.get(cg::ShaderStage::ps, "SampleLightingPass.psh")->getResourceLocationDict();
 			      
 				  auto gbufferLocationDict = locationDict.at(cg::ShaderResourceType::Texture);
-				  gbuffer.get("BaseColorRoughness")->set(cg::ShaderStage::ps, gbufferLocationDict.at("baseColorRoughnessMap"), cg::GPUAccessFlags::R);
-				  gbuffer.get("NormalMetalness")   ->set(cg::ShaderStage::ps, gbufferLocationDict.at("normalMetalnessMap"),    cg::GPUAccessFlags::R);
-				  gbuffer.get("IOR")               ->set(cg::ShaderStage::ps, gbufferLocationDict.at("iorMap"),                cg::GPUAccessFlags::R);
-				  gbuffer.get("Depth")             ->set(cg::ShaderStage::ps, gbufferLocationDict.at("depthMap"),              cg::GPUAccessFlags::R);
-				  gbuffer.get("ShadowMap")         ->set(cg::ShaderStage::ps, gbufferLocationDict.at("shadowMap"),             cg::GPUAccessFlags::R);
+				  gbuffer.get(SampleGBuffer::BaseColorRoughness)->set(cg::ShaderStage::ps, gbufferLocationDict.at("baseColorRoughnessMap"), cg::GPUAccessFlags::R);
+				  gbuffer.get(SampleGBuffer::NormalMetalness)   ->set(cg::ShaderStage::ps, gbufferLocationDict.at("normalMetalnessMap"),    cg::GPUAccessFlags::R);
+				  gbuffer.get(SampleGBuffer::IOR)               ->set(cg::ShaderStage::ps, gbufferLocationDict.at("iorMap"),                cg::GPUAccessFlags::R);
+				  gbuffer.get(SampleGBuffer::Depth)             ->set(cg::ShaderStage::ps, gbufferLocationDict.at("depthMap"),              cg::GPUAccessFlags::R);
+				  gbuffer.get(SampleGBuffer::ShadowMap)         ->set(cg::ShaderStage::ps, gbufferLocationDict.at("shadowMap"),             cg::GPUAccessFlags::R);
 
 				  gbufferSampler->set(cg::ShaderStage::ps, locationDict.at(cg::ShaderResourceType::TextureSampler).at("gbufferSampler"));
 			  }
