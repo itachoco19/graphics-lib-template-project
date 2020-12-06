@@ -78,6 +78,7 @@ DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::I
 		  DefferedRenderPipeline::LightingPass
 		  (
 			  "Sample Lighting Pass",
+			  geometryPass,
 			  lightingPassRenderTarget,
 			  std::make_shared<cg::TransformConstantBuffer>
 			  (
@@ -135,7 +136,6 @@ DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::I
 				  }
 		      ),
 			  std::dynamic_pointer_cast<cg::IPixelShader>(cg::ShaderPool::shared.createFromFileAndAdd(cg::ShaderStage::ps, "SampleLightingPass.psh", "SampleLightingPass.psh", "ps_main", "ps_4_0")),
-			  geometryPass,
 			  gbufferSampler,
 			  [=](const cg::GBuffer& gbuffer_, std::shared_ptr<cg::ITextureSampler> gbufferSampler_)
 			  {
