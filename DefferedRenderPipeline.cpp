@@ -65,22 +65,6 @@ cg::GBuffer DefferedRenderPipeline::GeometryPass::getGBuffer() const
 	return m_geometryRenderPipelineList.begin()->get()->getGBuffer();
 }
 
-void DefferedRenderPipeline::GeometryPass::initializeMultipleRenderTarget(std::shared_ptr<cg::IMultipleRenderTarget> multipleRenderTarget)
-{
-	for (auto geometryRenderPipeline : m_geometryRenderPipelineList)
-	{
-		geometryRenderPipeline->initializeMultipleRenderTarget(multipleRenderTarget);
-	}
-}
-
-void DefferedRenderPipeline::GeometryPass::initializeDepthStencilBuffer(std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer)
-{
-	for (auto geometryRenderPipeline : m_geometryRenderPipelineList)
-	{
-		geometryRenderPipeline->initializeDepthStencilBuffer(depthStencilBuffer);
-	}
-}
-
 void DefferedRenderPipeline::GeometryPass::drawImGuiComponents()
 {
 	for (auto geometryRenderPipeline : m_geometryRenderPipelineList)

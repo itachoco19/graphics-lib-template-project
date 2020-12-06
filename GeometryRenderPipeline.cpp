@@ -4,13 +4,13 @@
 
 
 
-GeometryRenderPipeline::GeometryRenderPipeline(const std::string& name, const cg::GBuffer& gbuffer, const TargetRenderingGroupNameList& targetRenderingGroupNameList, std::shared_ptr<cg::MaterialConstantBuffer> materialConstantBuffer, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, const cg::RasterizationBasedRenderPipeline::ShaderDict& shaderDict, AdditionalSetCallScene additionalSetCall)
-	: GeometryRenderPipeline(name, gbuffer, targetRenderingGroupNameList, materialConstantBuffer, transformConstantBuffer, cg::API::shared.graphics()->createDepthStencilTester(cg::ComparisonFunction::less, cg::ComparisonFunction::always, true, false, true), shaderDict, additionalSetCall)
+GeometryRenderPipeline::GeometryRenderPipeline(const std::string& name, std::shared_ptr<cg::IMultipleRenderTarget> mrt, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer, const cg::GBuffer& gbuffer, const TargetRenderingGroupNameList& targetRenderingGroupNameList, std::shared_ptr<cg::MaterialConstantBuffer> materialConstantBuffer, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, const cg::RasterizationBasedRenderPipeline::ShaderDict& shaderDict, AdditionalSetCallScene additionalSetCall)
+	: GeometryRenderPipeline(name, mrt, depthStencilBuffer, gbuffer, targetRenderingGroupNameList, materialConstantBuffer, transformConstantBuffer, cg::API::shared.graphics()->createDepthStencilTester(cg::ComparisonFunction::less, cg::ComparisonFunction::always, true, false, true), shaderDict, additionalSetCall)
 {
 }
 
-GeometryRenderPipeline::GeometryRenderPipeline(const std::string& name, const cg::GBuffer& gbuffer, const TargetRenderingGroupNameList& targetRenderingGroupNameList, std::shared_ptr<cg::MaterialConstantBuffer> materialConstantBuffer, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::IDepthStencilTester> depthTesterLessFunction, const cg::RasterizationBasedRenderPipeline::ShaderDict& shaderDict, AdditionalSetCallScene additionalSetCall)
-	: RenderPipelineMRTWithImGuiComponents(name, targetRenderingGroupNameList, nullptr, nullptr, materialConstantBuffer, transformConstantBuffer, nullptr, depthTesterLessFunction, shaderDict),
+GeometryRenderPipeline::GeometryRenderPipeline(const std::string& name, std::shared_ptr<cg::IMultipleRenderTarget> mrt, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer, const cg::GBuffer& gbuffer, const TargetRenderingGroupNameList& targetRenderingGroupNameList, std::shared_ptr<cg::MaterialConstantBuffer> materialConstantBuffer, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::IDepthStencilTester> depthTesterLessFunction, const cg::RasterizationBasedRenderPipeline::ShaderDict& shaderDict, AdditionalSetCallScene additionalSetCall)
+	: RenderPipelineMRTWithImGuiComponents(name, targetRenderingGroupNameList, mrt, depthStencilBuffer, materialConstantBuffer, transformConstantBuffer, nullptr, depthTesterLessFunction, shaderDict),
 	  m_additionalSetCall(additionalSetCall)
 {
 	m_GBuffer = gbuffer;
@@ -34,21 +34,11 @@ void GeometryRenderPipeline::render()
 
 }
 
-void GeometryRenderPipeline::initializeMultipleRenderTarget(std::shared_ptr<cg::IMultipleRenderTarget> mrt)
-{
-	m_multipleRenderTarget = mrt;
-}
-
-void GeometryRenderPipeline::initializeDepthStencilBuffer(std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer)
-{
-	m_depthStencilBuffer = depthStencilBuffer;
-}
-
 void GeometryRenderPipeline::drawImGuiComponents()
 {
 	if (ImGui::TreeNode("GBuffer"))
 	{
-		std::string bufferName = "";
+		static std::string bufferName = "";
 		const auto contents = m_GBuffer.getAllContents();
 
 		for (const auto content : contents)
