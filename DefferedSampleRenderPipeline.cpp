@@ -56,9 +56,6 @@ const auto constructGeometryPass = [](const cg::RasterizationBasedRenderPipeline
 		}
 	);
 
-	geometryPass.initializeMultipleRenderTarget(geometryPassMRT);
-	geometryPass.initializeDepthStencilBuffer(geometryPassDepthStencilBuffer);
-
 	return geometryPass;
 };
 

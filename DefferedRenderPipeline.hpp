@@ -26,9 +26,7 @@ public:
 		void render() override;
 
 		cg::GBuffer getGBuffer() const;
-		void initializeMultipleRenderTarget(std::shared_ptr<cg::IMultipleRenderTarget> multipleRenderTarget);
-		void initializeDepthStencilBuffer(std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer);
-
+		
 		void drawImGuiComponents() override;
 	};
 	class LightingPass
