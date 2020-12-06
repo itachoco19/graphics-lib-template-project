@@ -135,7 +135,7 @@ DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::I
 				  }
 		      ),
 			  std::dynamic_pointer_cast<cg::IPixelShader>(cg::ShaderPool::shared.createFromFileAndAdd(cg::ShaderStage::ps, "SampleLightingPass.psh", "SampleLightingPass.psh", "ps_main", "ps_4_0")),
-			  geometryPass.getGBuffer(),
+			  geometryPass,
 			  [=](const cg::GBuffer& gbuffer)
 			  {
 				  auto locationDict = cg::ShaderPool::shared.get(cg::ShaderStage::ps, "SampleLightingPass.psh")->getResourceLocationDict();
