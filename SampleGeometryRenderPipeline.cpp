@@ -5,7 +5,7 @@
 
 
 
-SampleGeometryRenderPipeline::SampleGeometryRenderPipeline(std::shared_ptr<cg::IMultipleRenderTarget> mrt, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer, std::shared_ptr<cg::IDepthStencilBuffer> shadowMap, const TargetRenderingGroupNameList& targetRenderingGroupNameList)
+SampleGeometryRenderPipeline::SampleGeometryRenderPipeline(std::shared_ptr<cg::IMultipleRenderTargets> mrt, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer, std::shared_ptr<cg::IDepthStencilBuffer> shadowMap, const TargetRenderingGroupNameList& targetRenderingGroupNameList)
 	: GeometryRenderPipeline
 	  (
 	      "Sample Geometry Render Pipeline",

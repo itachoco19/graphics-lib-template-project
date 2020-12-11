@@ -14,10 +14,12 @@ const cg::RasterizationBasedRenderPipeline::TargetRenderingGroupNameList targetR
 
 
 
-const auto createMRT = [](const cpp::Vector2D<int>& lightingPassRenderTargetSize)
+const auto constructGeometryPass = [](const cg::RasterizationBasedRenderPipeline::TargetRenderingGroupNameList& targetRenderingGroupNameList, std::shared_ptr<cg::IRenderTarget> lightingPassRenderTarget, std::shared_ptr<cg::IDepthStencilBuffer> geometryPassDepthStencilBuffer, std::shared_ptr<cg::IDepthStencilBuffer> shadowMap)
 {
-	return 
-	cg::API::shared.graphics()->createMultipleRenderTarget
+	const auto lightingPassRenderTargetSize = lightingPassRenderTarget->getSize();
+	const auto sampleCount  = lightingPassRenderTarget->getMSAASampleCount();
+	const auto geometryPassMRT = 
+	cg::API::shared.graphics()->createMultipleRenderTargets
 	(
 		lightingPassRenderTargetSize,
 		{
@@ -38,9 +40,7 @@ const auto createMRT = [](const cpp::Vector2D<int>& lightingPassRenderTargetSize
 			),
 		}
 	);
-};
-const auto constructGeometryPass = [](const cg::RasterizationBasedRenderPipeline::TargetRenderingGroupNameList& targetRenderingGroupNameList, std::shared_ptr<cg::IRenderTarget> lightingPassRenderTarget, std::shared_ptr<cg::IMultipleRenderTarget> geometryPassMRT, std::shared_ptr<cg::IDepthStencilBuffer> geometryPassDepthStencilBuffer, std::shared_ptr<cg::IDepthStencilBuffer> shadowMap)
-{
+
 	auto geometryPass = 
 	DefferedRenderPipeline::GeometryPass
 	(
@@ -160,8 +160,8 @@ DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::I
 {
 	m_shadowMapRenderingPass.initializeDepthStencilBuffer(shadowMap);
 }
-DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> lightingPassRenderTarget, std::shared_ptr<cg::IMultipleRenderTarget> geometryPassMRT, std::shared_ptr<cg::IDepthStencilBuffer> geometryPassDepthStencilBuffer, std::shared_ptr<cg::ITextureSampler> gbufferSampler, std::shared_ptr<cg::IDepthStencilBuffer> shadowMap)
-	: DefferedSampleRenderPipeline(lightingPassRenderTarget, constructGeometryPass(targetRenderingGroupNameList, lightingPassRenderTarget, geometryPassMRT, geometryPassDepthStencilBuffer, shadowMap), gbufferSampler, shadowMap)
+DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> lightingPassRenderTarget, std::shared_ptr<cg::IDepthStencilBuffer> geometryPassDepthStencilBuffer, std::shared_ptr<cg::ITextureSampler> gbufferSampler, std::shared_ptr<cg::IDepthStencilBuffer> shadowMap)
+	: DefferedSampleRenderPipeline(lightingPassRenderTarget, constructGeometryPass(targetRenderingGroupNameList, lightingPassRenderTarget, geometryPassDepthStencilBuffer, shadowMap), gbufferSampler, shadowMap)
 {
 }
 
@@ -171,15 +171,17 @@ DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::I
 }
 
 DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> lightingPassRenderTarget, std::shared_ptr<cg::ITextureSampler> gbufferSampler)
-	: DefferedSampleRenderPipeline(lightingPassRenderTarget, createMRT(lightingPassRenderTarget->getSize()), cg::API::shared.graphics()->createDepthStencilBuffer(lightingPassRenderTarget->getSize(), cg::TextureFormat::D32_FLOAT), gbufferSampler, cg::API::shared.graphics()->createDepthStencilBuffer(lightingPassRenderTarget->getSize(), cg::TextureFormat::D32_FLOAT))
+	: DefferedSampleRenderPipeline(lightingPassRenderTarget, cg::API::shared.graphics()->createDepthStencilBuffer(lightingPassRenderTarget->getSize(), cg::TextureFormat::D32_FLOAT), gbufferSampler, cg::API::shared.graphics()->createDepthStencilBuffer(lightingPassRenderTarget->getSize(), cg::TextureFormat::D32_FLOAT, lightingPassRenderTarget->getMSAASampleCount(), lightingPassRenderTarget->getMSAAQualityLevel()))
 {
 }
 
 void DefferedSampleRenderPipeline::render(const cg::Scene& scene)
 {
 	const auto keyLight = scene.getLight<SimpleDirectionalLight>("Key");
+	
 	m_shadowMap->refresh();
 	m_shadowMapRenderingPass.render(scene, keyLight->perspective);
+	m_shadowMap->getDepthBufferTexture()->resolve();
 
 	accessToGeometryPass().render(scene);
 	accessToLightingPass().render(scene);
