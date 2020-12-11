@@ -35,7 +35,7 @@ ForwardSampleRenderPipeline::ForwardSampleRenderPipeline(std::shared_ptr<cg::IRe
 }
 
 ForwardSampleRenderPipeline::ForwardSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::IDepthStencilTester> depthStencilTester, bool shouldRefreshRenderTarget, bool shouldRefreshDepthStencilBuffer)
-	: ForwardSampleRenderPipeline(renderTarget, cg::API::shared.graphics()->createDepthStencilBuffer(renderTarget->getSize(), cg::TextureFormat::D32_FLOAT), depthStencilTester, true, true)
+	: ForwardSampleRenderPipeline(renderTarget, cg::API::shared.graphics()->createDepthStencilBuffer(renderTarget->getSize(), cg::TextureFormat::D32_FLOAT, renderTarget->getMSAASampleCount(), renderTarget->getMSAAQualityLevel()), depthStencilTester, true, true)
 {
 }
 
@@ -50,9 +50,11 @@ void ForwardSampleRenderPipeline::render(const cg::Scene& scene)
 		getDepthStencilBuffer()->refresh();
 	}
 
+	const auto keyLight = scene.getLight<SimpleDirectionalLight>("Key");
+
 	m_shadowMap->refresh();
-	const auto keyLight = std::dynamic_pointer_cast<SimpleDirectionalLight>(scene.getLightDict().at("Key"));
 	m_shadowMapRenderingPass.render(scene, keyLight->perspective);
+	m_shadowMap->getDepthBufferTexture()->resolve();
 
 	m_shadingRenderPipeline.render(scene);
 }

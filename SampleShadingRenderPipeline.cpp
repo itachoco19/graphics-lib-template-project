@@ -115,13 +115,7 @@ void SampleShadingRenderPipeline::render(const cg::Scene& scene)
 	{
 		m_renderTarget->set(m_depthStencilBuffer);
 
-		auto shadowMap = m_shadowMap->getDepthBufferTexture();
-		if (m_shadowMap->getDepthBufferTextureMS())
-		{
-			shadowMap->resolve();
-		}
-
-		shadowMap->set(cg::ShaderStage::ps, pixelShaderLocationDict.at(cg::ShaderResourceType::Texture).at("shadowMap"), cg::GPUAccessType::R);
+		m_shadowMap->getDepthBufferTexture()->set(cg::ShaderStage::ps, pixelShaderLocationDict.at(cg::ShaderResourceType::Texture).at("shadowMap"), cg::GPUAccessType::R);
 		m_shadowMapSampler->set(cg::ShaderStage::ps, pixelShaderLocationDict.at(cg::ShaderResourceType::TextureSampler).at("shadowMapSampler"));
 	};
 	auto drawCall = [&]()
