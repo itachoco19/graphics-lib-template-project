@@ -121,7 +121,7 @@ void SampleShadingRenderPipeline::render(const cg::Scene& scene)
 			shadowMap->resolve();
 		}
 
-		shadowMap->set(cg::ShaderStage::ps, pixelShaderLocationDict.at(cg::ShaderResourceType::Texture).at("shadowMap"), cg::GPUAccessFlags::R);
+		shadowMap->set(cg::ShaderStage::ps, pixelShaderLocationDict.at(cg::ShaderResourceType::Texture).at("shadowMap"), cg::GPUAccessType::R);
 		m_shadowMapSampler->set(cg::ShaderStage::ps, pixelShaderLocationDict.at(cg::ShaderResourceType::TextureSampler).at("shadowMapSampler"));
 	};
 	auto drawCall = [&]()

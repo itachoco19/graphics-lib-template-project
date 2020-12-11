@@ -31,7 +31,7 @@ FullscreenTextureRenderPipeline::FullscreenTextureRenderPipeline(const std::stri
 									   const auto locationDict = customPixelShader->getResourceLocationDict();
 									   const auto targetBufferLocation = locationDict.at(cg::ShaderResourceType::Texture).at("target");
 									   const auto targetSamplerBufferLocation = locationDict.at(cg::ShaderResourceType::TextureSampler).at("targetSampler");
-								       m_target->set(cg::ShaderStage::ps, targetBufferLocation, cg::GPUAccessFlags::R);
+								       m_target->set(cg::ShaderStage::ps, targetBufferLocation, cg::GPUAccessType::R);
 									   m_targetSampler->set(cg::ShaderStage::ps, targetSamplerBufferLocation);
 									
 									   additionalSetCall();
