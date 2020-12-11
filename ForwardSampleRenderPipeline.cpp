@@ -49,8 +49,8 @@ void ForwardSampleRenderPipeline::render(const cg::Scene& scene)
 	{
 		getDepthStencilBuffer()->refresh();
 	}
-	m_shadowMap->refresh();
 
+	m_shadowMap->refresh();
 	const auto keyLight = std::dynamic_pointer_cast<SimpleDirectionalLight>(scene.getLightDict().at("Key"));
 	m_shadowMapRenderingPass.render(scene, keyLight->perspective);
 
