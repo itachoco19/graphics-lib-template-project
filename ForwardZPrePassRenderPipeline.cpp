@@ -14,9 +14,6 @@ ForwardZPrePassRenderPipeline::ForwardZPrePassRenderPipeline(const std::string& 
 
 void ForwardZPrePassRenderPipeline::render(const cg::Scene& scene)
 {
-	m_forwardRenderingRenderPipeline->getRenderTarget()->refresh();
-	m_forwardRenderingRenderPipeline->getDepthStencilBuffer()->refresh();
-
 	m_zPass.render(scene);
 	m_forwardRenderingRenderPipeline->render(scene);
 }

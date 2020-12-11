@@ -28,7 +28,6 @@ void FullscreenQuadRenderPipeline::render()
 {
 	auto setCall = [&]()
 	{
-		m_renderTarget->refresh();
 		m_renderTarget->set(nullptr);
 
 		m_additionalSetCall();
@@ -38,6 +37,7 @@ void FullscreenQuadRenderPipeline::render()
 		m_quad->parts.at("main").getGeometryBuffer()->draw(m_quad->primitiveTopology, m_quad->instanceCount);
 	};
 
+	m_renderTarget->refresh();
 	renderDefault(setCall, drawCall);
 }
 
@@ -45,7 +45,6 @@ void FullscreenQuadRenderPipeline::render(const cg::Scene& scene)
 {
 	auto setCall = [&](const cg::Scene& scene_)
 	{
-		m_renderTarget->refresh();
 		m_renderTarget->set(nullptr);
 
 		m_additionalSetCall();
@@ -55,5 +54,6 @@ void FullscreenQuadRenderPipeline::render(const cg::Scene& scene)
 		m_quad->parts.at("main").getGeometryBuffer()->draw(m_quad->primitiveTopology, m_quad->instanceCount);
 	};
 
+	m_renderTarget->refresh();
 	renderDefault(scene, false, setCall, drawCall);
 }
