@@ -55,5 +55,5 @@ void FullscreenQuadRenderPipeline::render(const cg::Scene& scene)
 		m_quad->parts.at("main").getGeometryBuffer()->draw(m_quad->primitiveTopology, m_quad->instanceCount);
 	};
 
-	renderDefault(scene, setCall, drawCall, false);
+	renderDefault(scene, false, setCall, drawCall);
 }
