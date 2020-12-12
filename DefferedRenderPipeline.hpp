@@ -24,8 +24,6 @@ public:
 		void render(const cg::Scene& scene, cg::Camera& customCamera);
 		void render(const cg::Scene& scene) override;
 		void render() override;
-
-		cg::GBuffer getGBuffer() const;
 		
 		void drawImGuiComponents() override;
 	};
@@ -34,10 +32,12 @@ public:
 	{
 	public:
 		using ShaderResourceGBufferSetCall = std::function<void(const cg::GBuffer& gbuffer, const std::shared_ptr<cg::ITextureSampler> gbufferSampler)>;
+	private:
+		cg::GBuffer m_GBuffer;
 	public:
-		LightingPass(const std::string& name, const GeometryPass& geometryPass, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IPixelShader> pixelShader, std::shared_ptr<cg::ITextureSampler> gbufferSampler, const ShaderResourceGBufferSetCall& shaderResourceSetCall);
-		LightingPass(const std::string& name, const GeometryPass& geometryPass, std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IPixelShader> pixelShader, std::shared_ptr<cg::ITextureSampler> gbufferSampler, const ShaderResourceGBufferSetCall& shaderResourceSetCall);
-		LightingPass(const std::string& name, const GeometryPass& geometryPass, std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, const FullscreenQuad& quad, std::shared_ptr<cg::IPixelShader> pixelShader, std::shared_ptr<cg::ITextureSampler> gbufferSampler, const ShaderResourceGBufferSetCall& shaderResourceSetCall);
+		LightingPass(const std::string& name, std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IPixelShader> pixelShader, const cg::GBuffer& gbuffer, std::shared_ptr<cg::ITextureSampler> gbufferSampler, const ShaderResourceGBufferSetCall& shaderResourceSetCall, const FullscreenQuad& quad = FullscreenQuad());
+
+		void drawImGuiComponents() override;
 	};
 private:
 	GeometryPass m_geometryPass;

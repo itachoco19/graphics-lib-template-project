@@ -56,15 +56,6 @@ void DefferedRenderPipeline::GeometryPass::render()
 	}
 }
 
-cg::GBuffer DefferedRenderPipeline::GeometryPass::getGBuffer() const
-{
-	if (m_geometryRenderPipelineList.empty())
-	{
-		return cg::GBuffer();
-	}
-	return m_geometryRenderPipelineList.begin()->get()->getGBuffer();
-}
-
 void DefferedRenderPipeline::GeometryPass::drawImGuiComponents()
 {
 	for (auto geometryRenderPipeline : m_geometryRenderPipelineList)
@@ -82,22 +73,32 @@ void DefferedRenderPipeline::GeometryPass::drawImGuiComponents()
 
 
 
-const auto createShaderResourceSetCall = [](const DefferedRenderPipeline::LightingPass::ShaderResourceGBufferSetCall& shaderResourceGBufferSetCall, const DefferedRenderPipeline::GeometryPass& geometryPass, std::shared_ptr<cg::ITextureSampler> gbufferSampler)
-{
-	return [=](){ shaderResourceGBufferSetCall(geometryPass.getGBuffer(), gbufferSampler); };
-};
-
-DefferedRenderPipeline::LightingPass::LightingPass(const std::string& name, const GeometryPass& geometryPass, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IPixelShader> pixelShader, std::shared_ptr<cg::ITextureSampler> gbufferSampler, const ShaderResourceGBufferSetCall& shaderResourceSetCall)
-	: FullscreenQuadRenderPipeline(name, transformConstantBuffer, lightConstantBuffer, pixelShader, createShaderResourceSetCall(shaderResourceSetCall, geometryPass, gbufferSampler))
+DefferedRenderPipeline::LightingPass::LightingPass(const std::string& name, std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IPixelShader> pixelShader, const cg::GBuffer& gbuffer, std::shared_ptr<cg::ITextureSampler> gbufferSampler, const ShaderResourceGBufferSetCall& shaderResourceSetCall, const FullscreenQuad& quad)
+	: FullscreenQuadRenderPipeline(name, renderTarget, transformConstantBuffer, lightConstantBuffer, pixelShader, [=]() { shaderResourceSetCall(gbuffer, gbufferSampler); }, quad),
+	  m_GBuffer(gbuffer)
 {
 }
 
-DefferedRenderPipeline::LightingPass::LightingPass(const std::string& name, const GeometryPass& geometryPass, std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IPixelShader> pixelShader, std::shared_ptr<cg::ITextureSampler> gbufferSampler, const ShaderResourceGBufferSetCall& shaderResourceSetCall)
-	: FullscreenQuadRenderPipeline(name, renderTarget, transformConstantBuffer, lightConstantBuffer, pixelShader, createShaderResourceSetCall(shaderResourceSetCall, geometryPass, gbufferSampler))
+void DefferedRenderPipeline::LightingPass::drawImGuiComponents()
 {
-}
+	if (ImGui::TreeNode("GBuffer"))
+	{
+		static std::string bufferName = "";
+		const auto contents = m_GBuffer.getAllContents();
 
-DefferedRenderPipeline::LightingPass::LightingPass(const std::string& name, const GeometryPass& geometryPass, std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, const FullscreenQuad& quad, std::shared_ptr<cg::IPixelShader> pixelShader, std::shared_ptr<cg::ITextureSampler> gbufferSampler, const ShaderResourceGBufferSetCall& shaderResourceSetCall)
-	: FullscreenQuadRenderPipeline(name, renderTarget, quad, transformConstantBuffer, lightConstantBuffer, pixelShader, createShaderResourceSetCall(shaderResourceSetCall, geometryPass, gbufferSampler))
-{
+		for (const auto content : contents)
+		{
+			if (ImGui::Button(content.name.c_str()))
+			{
+				bufferName = content.name;
+			}
+		}
+		if (bufferName == "") { return; }
+
+		const auto image = m_GBuffer.get(bufferName);
+		const auto imageSize = image->getSize() / 5;
+		ImGui::Image(image, ImVec2(imageSize.x, imageSize.y));
+
+		ImGui::TreePop();
+	}
 }
