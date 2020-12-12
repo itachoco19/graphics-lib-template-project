@@ -9,7 +9,6 @@ ForwardZPrePassRenderPipeline::ForwardZPrePassRenderPipeline(const std::string& 
 	  m_zPass(zPass),
 	  m_forwardRenderingRenderPipeline(forwardRenderingRenderPipeline)
 {
-	m_zPass.initializeDepthStencilBuffer(m_forwardRenderingRenderPipeline->getDepthStencilBuffer());
 }
 
 void ForwardZPrePassRenderPipeline::render(const cg::Scene& scene)

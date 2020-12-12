@@ -14,9 +14,9 @@ private:
 	std::shared_ptr<cg::IDepthStencilBuffer> m_shadowMap;
 	std::shared_ptr<cg::ITextureSampler> m_shadowMapSampler;
 
+	DepthPass m_shadowMapRenderingPass;
 	SampleShadingRenderPipeline m_shadingRenderPipeline;
-	DepthPass m_shadowMapRenderingPass;	
-
+	
 	bool m_shouldRefreshRenderTarget;
 	bool m_shouldRefreshDepthStencilBuffer;
 public:
