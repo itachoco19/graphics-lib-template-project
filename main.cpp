@@ -47,11 +47,11 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
 	std::string renderingGroupName;
 	try
 	{
-		renderPipeline = std::make_shared<DefferedSampleRenderPipeline>(mainRenderTarget);
-		renderingGroupName = DefferedSampleRenderPipeline::targetRenderingGroupName;
+		//renderPipeline = std::make_shared<DefferedSampleRenderPipeline>(mainRenderTarget);
+		//renderingGroupName = DefferedSampleRenderPipeline::targetRenderingGroupName;
 
-		//renderPipeline = std::make_shared<ForwardSampleRenderPipeline>(mainRenderTarget);
-		//renderingGroupName = ForwardSampleRenderPipeline::targetRenderingGroupName;
+		renderPipeline = std::make_shared<ForwardSampleRenderPipeline>(mainRenderTarget);
+		renderingGroupName = ForwardSampleRenderPipeline::targetRenderingGroupName;
 
 		//renderPipeline = std::make_shared<ForwardZPrePassSampleRenderPipeline>(mainRenderTarget);
 		//renderingGroupName = ForwardZPrePassSampleRenderPipeline::targetRenderingGroupName;
