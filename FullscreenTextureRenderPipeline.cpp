@@ -22,7 +22,6 @@ FullscreenTextureRenderPipeline::FullscreenTextureRenderPipeline(const std::stri
 FullscreenTextureRenderPipeline::FullscreenTextureRenderPipeline(const std::string& name, std::shared_ptr<cg::ITexture2D> target, std::shared_ptr<cg::ITextureSampler> targetSampler, std::shared_ptr<cg::IRenderTarget> renderTarget, const FullscreenQuad& quad, std::shared_ptr<cg::IPixelShader> customPixelShader, AdditionalSetCall additionalSetCall)
 	: FullscreenQuadRenderPipeline(name, 
 		                           renderTarget,
-		                           quad,
 		                           nullptr,
 		                           nullptr,
 		                           customPixelShader,
@@ -35,7 +34,8 @@ FullscreenTextureRenderPipeline::FullscreenTextureRenderPipeline(const std::stri
 									   m_targetSampler->set(cg::ShaderStage::ps, targetSamplerBufferLocation);
 									
 									   additionalSetCall();
-								   }),
+								   },
+		                           quad),
 	  m_target(target),
 	  m_targetSampler(targetSampler)
 {
