@@ -10,6 +10,8 @@ class ForwardZPrePassSampleRenderPipeline
 {
 public:
 	static const std::string targetRenderingGroupName;
+private:
+	ForwardZPrePassSampleRenderPipeline(std::shared_ptr<ForwardRenderPipeline> forwardRenderPipeline);
 public:
 	ForwardZPrePassSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget);
 };

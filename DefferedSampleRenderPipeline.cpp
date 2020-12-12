@@ -154,11 +154,11 @@ DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::I
 		  "Shadow Map Rendering Pass", 
 		  {
 			  std::make_shared<Position3Normal3DepthRenderPipeline>(targetRenderingGroupNameList)
-		  }
+		  },
+		  shadowMap
 	  ),
 	  m_shadowMap(shadowMap)
 {
-	m_shadowMapRenderingPass.initializeDepthStencilBuffer(shadowMap);
 }
 DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> lightingPassRenderTarget, std::shared_ptr<cg::IDepthStencilBuffer> geometryPassDepthStencilBuffer, std::shared_ptr<cg::ITextureSampler> gbufferSampler, std::shared_ptr<cg::IDepthStencilBuffer> shadowMap)
 	: DefferedSampleRenderPipeline(lightingPassRenderTarget, constructGeometryPass(targetRenderingGroupNameList, lightingPassRenderTarget, geometryPassDepthStencilBuffer, shadowMap), gbufferSampler, shadowMap)
@@ -179,7 +179,6 @@ void DefferedSampleRenderPipeline::render(const cg::Scene& scene)
 {
 	const auto keyLight = scene.getLight<SimpleDirectionalLight>("Key");
 	
-	m_shadowMap->refresh();
 	m_shadowMapRenderingPass.render(scene, keyLight->perspective);
 	m_shadowMap->getDepthBufferTexture()->resolve();
 
