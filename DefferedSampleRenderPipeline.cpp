@@ -14,59 +14,6 @@ const cg::RasterizationBasedRenderPipeline::TargetRenderingGroupNameList targetR
 
 
 
-const auto constructGeometryPass = [](const cg::RasterizationBasedRenderPipeline::TargetRenderingGroupNameList& targetRenderingGroupNameList, std::shared_ptr<cg::IRenderTarget> lightingPassRenderTarget, std::shared_ptr<cg::IDepthStencilBuffer> geometryPassDepthStencilBuffer, std::shared_ptr<cg::IDepthStencilBuffer> shadowMap)
-{
-	const auto lightingPassRenderTargetSize = lightingPassRenderTarget->getSize();
-	const auto sampleCount  = lightingPassRenderTarget->getMSAASampleCount();
-	const auto geometryPassMRT = 
-	cg::API::shared.graphics()->createMultipleRenderTargets
-	(
-		lightingPassRenderTargetSize,
-		{
-			cg::API::shared.graphics()->createRenderTarget // Base Color + Roughness
-			(
-				lightingPassRenderTargetSize,
-				cg::TextureFormat::R32G32B32A32_FLOAT
-			),
-			cg::API::shared.graphics()->createRenderTarget // Normal + Metalness
-			(
-				lightingPassRenderTargetSize,
-				cg::TextureFormat::R32G32B32A32_FLOAT
-			),
-			cg::API::shared.graphics()->createRenderTarget // IOR
-			(
-				lightingPassRenderTargetSize,
-				cg::TextureFormat::R32_FLOAT
-			),
-		}
-	);
-
-	auto geometryPass = 
-	DefferedRenderPipeline::GeometryPass
-	(
-		"Sample Geometry Pass",
-		{
-			std::make_shared<SampleGeometryRenderPipeline>
-			(
-				geometryPassMRT,
-				geometryPassDepthStencilBuffer,
-				shadowMap,				
-				targetRenderingGroupNameList
-			)
-		}
-	);
-
-	return geometryPass;
-};
-
-
-
-
-
-
-
-
-
 DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> lightingPassRenderTarget, const GeometryPass& geometryPass, std::shared_ptr<cg::ITextureSampler> gbufferSampler, std::shared_ptr<cg::IDepthStencilBuffer> shadowMap)
 	: DefferedRenderPipeline
 	  (
@@ -154,14 +101,40 @@ DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::I
 		  "Shadow Map Rendering Pass", 
 		  {
 			  std::make_shared<Position3Normal3DepthRenderPipeline>(targetRenderingGroupNameList)
-		  },
-		  shadowMap
+		  }
 	  ),
 	  m_shadowMap(shadowMap)
 {
+	m_shadowMapRenderingPass.initializeDepthStencilBuffer(shadowMap);
 }
-DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> lightingPassRenderTarget, std::shared_ptr<cg::IDepthStencilBuffer> geometryPassDepthStencilBuffer, std::shared_ptr<cg::ITextureSampler> gbufferSampler, std::shared_ptr<cg::IDepthStencilBuffer> shadowMap)
-	: DefferedSampleRenderPipeline(lightingPassRenderTarget, constructGeometryPass(targetRenderingGroupNameList, lightingPassRenderTarget, geometryPassDepthStencilBuffer, shadowMap), gbufferSampler, shadowMap)
+DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> lightingPassRenderTarget, std::shared_ptr<cg::ITextureSampler> gbufferSampler, std::shared_ptr<cg::IDepthStencilBuffer> shadowMap)
+	: DefferedSampleRenderPipeline
+	  (
+		  lightingPassRenderTarget,
+		  DefferedRenderPipeline::GeometryPass
+		  (
+			  "Sample Geometry Pass",
+			  {
+				  std::make_shared<SampleGeometryRenderPipeline>
+				  (
+					  cg::API::shared.graphics()->createMultipleRenderTargets
+					  (
+						  lightingPassRenderTarget->getSize(),
+						  {
+							  cg::TextureFormat::R32G32B32A32_FLOAT, // Base Color + Roughness
+							  cg::TextureFormat::R32G32B32A32_FLOAT, // Normal + Metalness
+							  cg::TextureFormat::R32_FLOAT           // IOR
+						  }
+					  ),
+					  cg::API::shared.graphics()->createDepthStencilBuffer(lightingPassRenderTarget->getSize(), cg::TextureFormat::D32_FLOAT),
+					  shadowMap,
+					  targetRenderingGroupNameList
+				  )
+			  }
+		  ),
+		  gbufferSampler,
+		  shadowMap
+	  )
 {
 }
 
@@ -171,7 +144,7 @@ DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::I
 }
 
 DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> lightingPassRenderTarget, std::shared_ptr<cg::ITextureSampler> gbufferSampler)
-	: DefferedSampleRenderPipeline(lightingPassRenderTarget, cg::API::shared.graphics()->createDepthStencilBuffer(lightingPassRenderTarget->getSize(), cg::TextureFormat::D32_FLOAT), gbufferSampler, cg::API::shared.graphics()->createDepthStencilBuffer(lightingPassRenderTarget->getSize(), cg::TextureFormat::D32_FLOAT, lightingPassRenderTarget->getMSAASampleCount(), lightingPassRenderTarget->getMSAAQualityLevel()))
+	: DefferedSampleRenderPipeline(lightingPassRenderTarget, gbufferSampler, cg::API::shared.graphics()->createDepthStencilBuffer(lightingPassRenderTarget->getSize(), cg::TextureFormat::D32_FLOAT, lightingPassRenderTarget->getMSAASampleCount(), lightingPassRenderTarget->getMSAAQualityLevel()))
 {
 }
 
@@ -179,6 +152,7 @@ void DefferedSampleRenderPipeline::render(const cg::Scene& scene)
 {
 	const auto keyLight = scene.getLight<SimpleDirectionalLight>("Key");
 	
+	m_shadowMap->refresh();
 	m_shadowMapRenderingPass.render(scene, keyLight->perspective);
 	m_shadowMap->getDepthBufferTexture()->resolve();
 
