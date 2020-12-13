@@ -12,7 +12,6 @@ class DefferedSampleRenderPipeline
 	: public DefferedRenderPipeline
 {
 private:
-	std::shared_ptr<cg::IDepthStencilBuffer> m_shadowMap;
 	DepthPass m_shadowMapRenderingPass;
 public:
 	static const std::string targetRenderingGroupName;

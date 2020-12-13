@@ -11,9 +11,6 @@ class ForwardSampleRenderPipeline
 	: public ForwardRenderPipeline
 {
 private:
-	std::shared_ptr<cg::IDepthStencilBuffer> m_shadowMap;
-	std::shared_ptr<cg::ITextureSampler> m_shadowMapSampler;
-
 	DepthPass m_shadowMapRenderingPass;
 	SampleShadingRenderPipeline m_shadingRenderPipeline;
 	
@@ -22,7 +19,7 @@ private:
 public:
 	static const std::string targetRenderingGroupName;
 private:
-	ForwardSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer, std::shared_ptr<cg::IDepthStencilTester> depthStencilTester, bool shouldRefreshRenderTarget, bool shouldRefreshDepthStencilBuffer);
+	ForwardSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer, std::shared_ptr<cg::IDepthStencilTester> depthStencilTester, std::shared_ptr<cg::IDepthStencilBuffer> shadowMap, std::shared_ptr<cg::ITextureSampler> shadowMapSampler, bool shouldRefreshRenderTarget, bool shouldRefreshDepthStencilBuffer);
 public:
 	ForwardSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget);
 	ForwardSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::IDepthStencilTester> depthStencilTester, bool shouldRefreshRenderTarget = true, bool shouldRefreshDepthStencilBuffer = true);

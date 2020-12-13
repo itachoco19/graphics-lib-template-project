@@ -9,7 +9,7 @@ const std::string ForwardZPrePassSampleRenderPipeline::targetRenderingGroupName 
 const cg::RasterizationBasedRenderPipeline::TargetRenderingGroupNameList targetRenderingGroupNameList = { ForwardZPrePassSampleRenderPipeline::targetRenderingGroupName };
 
 ForwardZPrePassSampleRenderPipeline::ForwardZPrePassSampleRenderPipeline(std::shared_ptr<ForwardRenderPipeline> forwardRenderPipeline)
-	: ForwardZPrePassRenderPipeline("Forward Z Pre-Pass Sample Render Pipeline", DepthPass("Depth Pass", { std::make_shared<Position3Normal3DepthRenderPipeline>(targetRenderingGroupNameList, forwardRenderPipeline->getDepthStencilBuffer()) }, forwardRenderPipeline->getDepthStencilBuffer()), forwardRenderPipeline)
+	: ForwardZPrePassRenderPipeline("Forward Z Pre-Pass Sample Render Pipeline", DepthPass("Depth Pass", { std::make_shared<Position3Normal3DepthRenderPipeline>(targetRenderingGroupNameList, forwardRenderPipeline->getDepthStencilBuffer()) }, forwardRenderPipeline->getDepthStencilBuffer(), false), forwardRenderPipeline)
 {
 }
 

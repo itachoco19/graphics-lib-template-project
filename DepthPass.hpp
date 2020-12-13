@@ -13,8 +13,9 @@ public:
 private:
 	std::shared_ptr<cg::IDepthStencilBuffer> m_depthStencilBuffer;
 	DepthRenderPipelineList m_zRenderPipelineList;
+	bool m_shouldResolveDepthStencilBuffer;
 public:
-	DepthPass(const std::string& name, const DepthRenderPipelineList& zRenderPipelineList, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer);
+	DepthPass(const std::string& name, const DepthRenderPipelineList& zRenderPipelineList, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer, bool shouldResolveDepthStencilBuffer);
 
 	void render(const cg::Scene& scene, cg::Camera& customCamera);
 	void render(const cg::Scene& scene) override;

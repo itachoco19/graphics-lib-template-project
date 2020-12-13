@@ -121,9 +121,9 @@ DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(const std::shared_ptr
 		  {
 			  std::make_shared<Position3Normal3DepthRenderPipeline>(targetRenderingGroupNameList, shadowMap)
 		  },
-		  shadowMap
-	  ),
-	  m_shadowMap(shadowMap)
+		  shadowMap,
+		  true
+	  )
 {
 }
 
