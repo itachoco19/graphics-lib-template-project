@@ -5,10 +5,6 @@ DepthPass::DepthPass(const std::string& name, const DepthRenderPipelineList& zRe
 	  m_depthStencilBuffer(depthStencilBuffer),
 	  m_zRenderPipelineList(zRenderPipelineList)
 {
-	for (auto zRenderPipeline : m_zRenderPipelineList)
-	{
-		zRenderPipeline->initializeDepthStencilBuffer(depthStencilBuffer);
-	}
 }
 
 void DepthPass::render(const cg::Scene& scene, cg::Camera& customCamera)

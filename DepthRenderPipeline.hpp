@@ -12,11 +12,9 @@ class DepthRenderPipeline
 private:
 	AdditionalSetCallScene m_additionalSetCall;
 public:
-	DepthRenderPipeline(const std::string& name, const TargetRenderingGroupNameList& targetRenderingGroupNameList, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, const cg::RasterizationBasedRenderPipeline::ShaderDict& shaderDict, AdditionalSetCallScene additionalSetCall = [](const cg::Scene& scene) {});
-	DepthRenderPipeline(const std::string& name, const TargetRenderingGroupNameList& targetRenderingGroupNameList, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::IDepthStencilTester> depthTesterLessFunction, const cg::RasterizationBasedRenderPipeline::ShaderDict& shaderDict, AdditionalSetCallScene additionalSetCall = [](const cg::Scene& scene) {});
+	DepthRenderPipeline(const std::string& name, const TargetRenderingGroupNameList& targetRenderingGroupNameList, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, const cg::RasterizationBasedRenderPipeline::ShaderDict& shaderDict, AdditionalSetCallScene additionalSetCall = [](const cg::Scene& scene) {});
+	DepthRenderPipeline(const std::string& name, const TargetRenderingGroupNameList& targetRenderingGroupNameList, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer, std::shared_ptr<cg::IDepthStencilTester> depthTesterLessFunction, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, const cg::RasterizationBasedRenderPipeline::ShaderDict& shaderDict, AdditionalSetCallScene additionalSetCall = [](const cg::Scene& scene) {});
 	virtual ~DepthRenderPipeline() = default;
-
-	void initializeDepthStencilBuffer(std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer);
 
 	void render(const cg::Scene& scene, const cg::Camera& customCamera);
 	void render(const cg::Scene& scene) override;
@@ -34,9 +32,10 @@ public:
 		: public DepthRenderPipeline\
 	{\
 	public:\
-		NAME##DepthRenderPipeline(const TargetRenderingGroupNameList& targetRenderingGroupNameList)\
+		NAME##DepthRenderPipeline(const TargetRenderingGroupNameList& targetRenderingGroupNameList, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer)\
 			: DepthRenderPipeline("Depth Render Pipeline",\
 			  targetRenderingGroupNameList,\
+              depthStencilBuffer,\
 			  std::make_shared<cg::TransformConstantBuffer>\
               (\
 				  cg::TransformConstantBuffer::BufferDict\

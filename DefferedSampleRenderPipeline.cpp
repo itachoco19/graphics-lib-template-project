@@ -119,7 +119,7 @@ DefferedSampleRenderPipeline::DefferedSampleRenderPipeline(const std::shared_ptr
 	  (
 		  "Shadow Map Rendering Pass", 
 		  {
-			  std::make_shared<Position3Normal3DepthRenderPipeline>(targetRenderingGroupNameList)
+			  std::make_shared<Position3Normal3DepthRenderPipeline>(targetRenderingGroupNameList, shadowMap)
 		  },
 		  shadowMap
 	  ),
@@ -157,7 +157,6 @@ void DefferedSampleRenderPipeline::render(const cg::Scene& scene)
 	const auto keyLight = scene.getLight<SimpleDirectionalLight>("Key");
 	
 	m_shadowMapRenderingPass.render(scene, keyLight->perspective);
-	m_shadowMap->getDepthBufferTexture()->resolve();
 
 	accessToGeometryPass().render(scene);
 	accessToLightingPass().render(scene);

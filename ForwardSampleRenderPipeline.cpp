@@ -21,7 +21,7 @@ ForwardSampleRenderPipeline::ForwardSampleRenderPipeline(std::shared_ptr<cg::IRe
 		  descriptor.filter = cg::TextureFilter::trilinear;
 		  return descriptor;
 	  }())),
-	  m_shadowMapRenderingPass(DepthPass("Shadow Map Render Pipeline", { std::make_shared<Position3Normal3DepthRenderPipeline>(targetRenderingGroupNameList) }, m_shadowMap)),
+	  m_shadowMapRenderingPass(DepthPass("Shadow Map Render Pipeline", { std::make_shared<Position3Normal3DepthRenderPipeline>(targetRenderingGroupNameList, m_shadowMap) }, m_shadowMap)),
 	  m_shadingRenderPipeline(targetRenderingGroupNameList, renderTarget, depthStencilBuffer, depthStencilTester, m_shadowMap, m_shadowMapSampler),
 	  m_shouldRefreshRenderTarget(shouldRefreshRenderTarget),
 	  m_shouldRefreshDepthStencilBuffer(shouldRefreshDepthStencilBuffer)

@@ -18,7 +18,20 @@ SampleShadingRenderPipeline::SampleShadingRenderPipeline(const TargetRenderingGr
 		  "Sample Shading Render Pipeline",
 		  targetRenderingGroupNameList,
 		  renderTarget, 
-		  depthStencilBuffer, 
+		  depthStencilBuffer,
+		  depthStencilTester,
+		  cg::API::shared.graphics()->createRasterizer(cg::CullMode::back, false, false, false, false, false, false),
+          cg::API::shared.graphics()->createAlphaBlender(cg::AlphaBlenderDescriptor()),
+		  {
+			  {
+				  cg::ShaderStage::vs,
+				  std::dynamic_pointer_cast<cg::IVertexShader>(cg::ShaderPool::shared.createFromFileAndAdd(cg::ShaderStage::vs, "SamplePosition3Normal3.vsh", "SamplePosition3Normal3.vsh", "vs_main", "vs_4_0"))
+			  },
+			  {
+				  cg::ShaderStage::ps,
+				  std::dynamic_pointer_cast<cg::IPixelShader>(cg::ShaderPool::shared.createFromFileAndAdd(cg::ShaderStage::ps, "SampleShading.psh", "SampleShading.psh", "ps_main", "ps_4_0"))
+			  }
+		  },
 		  std::make_shared<cg::MaterialConstantBuffer>
 		  (
 			  cg::MaterialConstantBuffer::BufferDict
@@ -88,32 +101,21 @@ SampleShadingRenderPipeline::SampleShadingRenderPipeline(const TargetRenderingGr
 					  )
 				  }
 			  }
-		  ),
-		  depthStencilTester,
-		  {
-			  { 
-				  cg::ShaderStage::vs,
-				  std::dynamic_pointer_cast<cg::IVertexShader>(cg::ShaderPool::shared.createFromFileAndAdd(cg::ShaderStage::vs, "SamplePosition3Normal3.vsh", "SamplePosition3Normal3.vsh", "vs_main", "vs_4_0")) 
-			  },
-			  {
-				  cg::ShaderStage::ps,
-				  std::dynamic_pointer_cast<cg::IPixelShader>(cg::ShaderPool::shared.createFromFileAndAdd(cg::ShaderStage::ps, "SampleShading.psh", "SampleShading.psh", "ps_main", "ps_4_0"))
-			  }
-		  }
+		  )
       ),
 	  m_shadowMap(shadowMap),
 	  m_shadowMapSampler(shadowMapSampler)
 {
-	m_rasterizer = cg::API::shared.graphics()->createRasterizer(cg::CullMode::back, false, false, false, false, false, false);
-	m_alphaBlender = cg::API::shared.graphics()->createAlphaBlender(cg::AlphaBlenderDescriptor());
 }
 
 void SampleShadingRenderPipeline::render(const cg::Scene& scene)
 {
 	const auto pixelShaderLocationDict = getDictOfShadersSetInPipeline().at(cg::ShaderStage::ps)->getResourceLocationDict();
+	const auto renderTarget = accessToRenderTarget();
+	const auto depthStencilBuffer = accessToDepthStencilBuffer();
 	auto setCall = [&](const cg::Scene scene)
 	{
-		m_renderTarget->set(m_depthStencilBuffer);
+		renderTarget->set(depthStencilBuffer);
 
 		m_shadowMap->getDepthBufferTexture()->set(cg::ShaderStage::ps, pixelShaderLocationDict.at(cg::ShaderResourceType::Texture).at("shadowMap"), cg::GPUAccessType::R);
 		m_shadowMapSampler->set(cg::ShaderStage::ps, pixelShaderLocationDict.at(cg::ShaderResourceType::TextureSampler).at("shadowMapSampler"));

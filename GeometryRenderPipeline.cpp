@@ -10,17 +10,20 @@ GeometryRenderPipeline::GeometryRenderPipeline(const std::string& name, std::sha
 }
 
 GeometryRenderPipeline::GeometryRenderPipeline(const std::string& name, std::shared_ptr<cg::IMultipleRenderTargets> mrt, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer, const TargetRenderingGroupNameList& targetRenderingGroupNameList, std::shared_ptr<cg::MaterialConstantBuffer> materialConstantBuffer, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::IDepthStencilTester> depthTesterLessFunction, const cg::RasterizationBasedRenderPipeline::ShaderDict& shaderDict, AdditionalSetCallScene additionalSetCall)
-	: RenderPipelineMRTWithImGuiComponents(name, targetRenderingGroupNameList, mrt, depthStencilBuffer, materialConstantBuffer, transformConstantBuffer, nullptr, depthTesterLessFunction, shaderDict),
+	: RenderPipelineMRTWithImGuiComponents(name, targetRenderingGroupNameList, mrt, depthStencilBuffer, depthTesterLessFunction, cg::API::shared.graphics()->createRasterizer(cg::CullMode::back, false, false, false, false, false, false), nullptr, shaderDict, materialConstantBuffer, transformConstantBuffer, nullptr),
 	  m_additionalSetCall(additionalSetCall)
 {
 }
 
 void GeometryRenderPipeline::render(const cg::Scene& scene, const cg::Camera& customCamera)
 {
-	m_multipleRenderTargets->refreshAll();
-	m_depthStencilBuffer->refresh();
+	const auto multipleRenderTargets = accessToMultipleRenderTargets();
+	const auto depthStencilBuffer = accessToDepthStencilBuffer();
 
-	renderDefault(scene, customCamera, true, [&](const cg::Scene&) { m_multipleRenderTargets->set(m_depthStencilBuffer); m_additionalSetCall(scene); }, []() {});
+	multipleRenderTargets->refreshAll();
+	depthStencilBuffer->refresh();
+
+	renderDefault(scene, customCamera, true, [&](const cg::Scene&) { multipleRenderTargets->set(depthStencilBuffer); m_additionalSetCall(scene); }, []() {});
 }
 
 void GeometryRenderPipeline::render(const cg::Scene& scene)
