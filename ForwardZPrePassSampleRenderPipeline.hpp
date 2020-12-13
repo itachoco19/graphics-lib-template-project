@@ -1,13 +1,17 @@
 #pragma once
-#include "ZPrePassForwardRendering.hpp"
+#include "ForwardZPrePassRenderPipeline.hpp"
 
 
 
 
 
 class ForwardZPrePassSampleRenderPipeline
-	: public ZPrePassForwardRendering
+	: public ForwardZPrePassRenderPipeline
 {
 public:
-	ForwardZPrePassSampleRenderPipeline(const std::string& name, std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer);
+	static const std::string targetRenderingGroupName;
+private:
+	ForwardZPrePassSampleRenderPipeline(std::shared_ptr<ForwardRenderPipeline> forwardRenderPipeline);
+public:
+	ForwardZPrePassSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget);
 };

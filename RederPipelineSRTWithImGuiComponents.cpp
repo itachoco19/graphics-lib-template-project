@@ -4,7 +4,7 @@
 
 
 
-RenderPipelineSRTWithImGuiComponents::RenderPipelineSRTWithImGuiComponents(const std::string& name, const TargetRenderingGroupNameList& targetRenderingGroupNameList, std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer, std::shared_ptr<cg::MaterialConstantBuffer> materialConstantBuffer, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IDepthStencilTester> depthStencilTester, const ShaderDict& shaders) noexcept
-	: RenderPipelineSRT(name, targetRenderingGroupNameList, renderTarget, depthStencilBuffer,  materialConstantBuffer, transformConstantBuffer, lightConstantBuffer, depthStencilTester, shaders)
+RenderPipelineSRTWithImGuiComponents::RenderPipelineSRTWithImGuiComponents(const std::string& name, const TargetRenderingGroupNameList& targetRenderingGroupNameList, std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer, std::shared_ptr<cg::IDepthStencilTester> depthStencilTester, std::shared_ptr<cg::IRasterizer> rasterizer, std::shared_ptr<cg::IAlphaBlender> alphaBlender, const ShaderDict& shaders, std::shared_ptr<cg::MaterialConstantBuffer> materialConstantBuffer, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer) noexcept
+	: RenderPipelineSRT(name, targetRenderingGroupNameList, renderTarget, depthStencilBuffer, depthStencilTester, rasterizer, alphaBlender, shaders,  materialConstantBuffer, transformConstantBuffer, lightConstantBuffer)
 {
 }

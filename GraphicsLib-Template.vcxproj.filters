@@ -88,15 +88,6 @@
     <ClInclude Include="RenderPipelineSRTWithImGuiComponents.hpp">
       <Filter>HeaderFiles\ImGui\ComponentsHolder\RenderPipeline</Filter>
     </ClInclude>
-    <ClInclude Include="ZPrePassForwardRendering.hpp">
-      <Filter>HeaderFiles\RenderPipeline\Base\ZPrePass</Filter>
-    </ClInclude>
-    <ClInclude Include="DefferedRenderingRenderPipeline.hpp">
-      <Filter>HeaderFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline</Filter>
-    </ClInclude>
-    <ClInclude Include="ForwardRenderingRenderPipeline.hpp">
-      <Filter>HeaderFiles\RenderPipeline\Base\ForwardRenderingRenderPipeline</Filter>
-    </ClInclude>
     <ClInclude Include="FullscreenQuadRenderPipeline.hpp">
       <Filter>HeaderFiles\RenderPipeline\Base\FullscreenQuadRenderPipeline</Filter>
     </ClInclude>
@@ -137,7 +128,7 @@
       <Filter>HeaderFiles\RenderPipeline\Base\FullscreenDepthTextureRenderPipeline</Filter>
     </ClInclude>
     <ClInclude Include="GeometryRenderPipeline.hpp">
-      <Filter>HeaderFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline\GeometryRenderPipeline</Filter>
+      <Filter>HeaderFiles\RenderPipeline\Base\DefferedRenderPipeline\GeometryRenderPipeline</Filter>
     </ClInclude>
     <ClInclude Include="DefferedSampleRenderPipeline.hpp">
       <Filter>HeaderFiles\RenderPipeline\Sample\Deffered</Filter>
@@ -147,6 +138,21 @@
     </ClInclude>
     <ClInclude Include="ForwardZPrePassSampleRenderPipeline.hpp">
       <Filter>HeaderFiles\RenderPipeline\Sample\Forward</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Base\ForwardRenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardZPrePassRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Base\ZPrePass</Filter>
+    </ClInclude>
+    <ClInclude Include="DefferedRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Base\DefferedRenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleGeometryRenderPipeline.hpp">
+      <Filter>HeaderFiles\RenderPipeline\Sample\Deffered\GeometryRenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleGBuffer.hpp">
+      <Filter>SourceFiles\RenderPipeline\Sample\Deffered\GBuffer\SampleGBuffer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -240,12 +246,6 @@
     <Filter Include="HeaderFiles\RenderPipeline\Base">
       <UniqueIdentifier>{d49dae6b-5435-426e-9db7-68178544d99b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="HeaderFiles\RenderPipeline\Base\ForwardRenderingRenderPipeline">
-      <UniqueIdentifier>{dccf0f98-cb15-4cb6-8811-f7c1a4efb047}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="HeaderFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline">
-      <UniqueIdentifier>{98b4007c-2306-4f89-bfa4-d08d321cfb52}</UniqueIdentifier>
-    </Filter>
     <Filter Include="HeaderFiles\RenderPipeline\Base\ZPrePass">
       <UniqueIdentifier>{dbc58f18-b749-4173-ad4e-f5c22229390f}</UniqueIdentifier>
     </Filter>
@@ -254,12 +254,6 @@
     </Filter>
     <Filter Include="SourceFiles\RenderPipeline\Base\ZPrePassForwardRendering">
       <UniqueIdentifier>{f4639237-87e0-4092-b60a-089c17761fd7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SourceFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline">
-      <UniqueIdentifier>{dc5a1ba3-cf16-4c45-a90f-91228225ddfb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SourceFiles\RenderPipeline\Base\ForwardRenderingRenderPipeline">
-      <UniqueIdentifier>{14717fbc-0c42-43b0-82a5-31ced2df5348}</UniqueIdentifier>
     </Filter>
     <Filter Include="SourceFiles\RenderPipeline\Base\FullscreenQuadRenderPipeline">
       <UniqueIdentifier>{660a78ee-d584-49fd-acc4-419fc7505df9}</UniqueIdentifier>
@@ -372,12 +366,6 @@
     <Filter Include="ShaderFiles\HLSL\VertexShader\DepthPass">
       <UniqueIdentifier>{373232f3-0676-43cb-8091-7d453b63fdc4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SourceFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline\GeometryPass">
-      <UniqueIdentifier>{220ab416-12f3-416d-bbd9-900ebb4bb532}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="HeaderFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline\GeometryRenderPipeline">
-      <UniqueIdentifier>{72932901-cd3f-4658-86d7-5066dc6c02c8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SourceFiles\RenderPipeline\Sample\Forward">
       <UniqueIdentifier>{ed68bfb3-ca66-4382-ba54-53d04d5b2ed0}</UniqueIdentifier>
     </Filter>
@@ -422,6 +410,36 @@
     </Filter>
     <Filter Include="ShaderFiles\HLSL\VertexShader\Sample\Forward">
       <UniqueIdentifier>{d1cc531a-5853-4220-a6af-1ffd4756968e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline\Base\ForwardRenderPipeline">
+      <UniqueIdentifier>{dccf0f98-cb15-4cb6-8811-f7c1a4efb047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Base\ForwardRenderPipeline">
+      <UniqueIdentifier>{14717fbc-0c42-43b0-82a5-31ced2df5348}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Base\DefferedRenderPipeline">
+      <UniqueIdentifier>{dc5a1ba3-cf16-4c45-a90f-91228225ddfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Base\DefferedRenderPipeline\GeometryPass">
+      <UniqueIdentifier>{220ab416-12f3-416d-bbd9-900ebb4bb532}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline\Base\DefferedRenderPipeline">
+      <UniqueIdentifier>{98b4007c-2306-4f89-bfa4-d08d321cfb52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline\Base\DefferedRenderPipeline\GeometryRenderPipeline">
+      <UniqueIdentifier>{72932901-cd3f-4658-86d7-5066dc6c02c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Sample\Deffered\SampleGeometryRenderPipeline">
+      <UniqueIdentifier>{2e2ab760-9c7d-48b6-8108-16ce4fd9399a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\RenderPipeline\Sample\Deffered\GeometryRenderPipeline">
+      <UniqueIdentifier>{9bb84450-ef1e-463a-bc84-c5de5832437b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Sample\Deffered\GBuffer">
+      <UniqueIdentifier>{b05f9eaa-a187-42d0-9067-6b1b38f00f34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\RenderPipeline\Sample\Deffered\GBuffer\SampleGBuffer">
+      <UniqueIdentifier>{0f6db4f9-57dd-4904-924d-29ae8089afb3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -494,15 +512,6 @@
     <ClCompile Include="CameraController.cpp">
       <Filter>SourceFiles\ObjectController\CameraController</Filter>
     </ClCompile>
-    <ClCompile Include="ForwardRenderingRenderPipeline.cpp">
-      <Filter>SourceFiles\RenderPipeline\Base\ForwardRenderingRenderPipeline</Filter>
-    </ClCompile>
-    <ClCompile Include="DefferedRenderingRenderPipeline.cpp">
-      <Filter>SourceFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline</Filter>
-    </ClCompile>
-    <ClCompile Include="ZPrePassForwardRendering.cpp">
-      <Filter>SourceFiles\RenderPipeline\Base\ZPrePassForwardRendering</Filter>
-    </ClCompile>
     <ClCompile Include="FullscreenQuadRenderPipeline.cpp">
       <Filter>SourceFiles\RenderPipeline\Base\FullscreenQuadRenderPipeline</Filter>
     </ClCompile>
@@ -543,7 +552,7 @@
       <Filter>SourceFiles\RenderPipeline\Base\FullscreenDepthTextureRenderPipeline</Filter>
     </ClCompile>
     <ClCompile Include="GeometryRenderPipeline.cpp">
-      <Filter>SourceFiles\RenderPipeline\Base\DefferedRenderingRenderPipeline\GeometryPass</Filter>
+      <Filter>SourceFiles\RenderPipeline\Base\DefferedRenderPipeline\GeometryPass</Filter>
     </ClCompile>
     <ClCompile Include="DefferedSampleRenderPipeline.cpp">
       <Filter>SourceFiles\RenderPipeline\Sample\Deffered</Filter>
@@ -554,6 +563,19 @@
     <ClCompile Include="ForwardZPrePassSampleRenderPipeline.cpp">
       <Filter>SourceFiles\RenderPipeline\Sample\Forward</Filter>
     </ClCompile>
+    <ClCompile Include="ForwardRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Base\ForwardRenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="ForwardZPrePassRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Base\ZPrePassForwardRendering</Filter>
+    </ClCompile>
+    <ClCompile Include="DefferedRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Base\DefferedRenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleGeometryRenderPipeline.cpp">
+      <Filter>SourceFiles\RenderPipeline\Sample\Deffered\SampleGeometryRenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleGBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ShaderConstant.hlsl">

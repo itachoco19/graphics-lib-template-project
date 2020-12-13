@@ -4,56 +4,54 @@
 
 
 
-FullscreenQuadRenderPipeline::FullscreenQuadRenderPipeline(const std::string& name, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IPixelShader> pixelShader, const ShaderResourceSetCall& setCallPixelShaderResource)
-	: FullscreenQuadRenderPipeline(name, cg::MainRenderTarget::shared.get(), transformConstantBuffer, lightConstantBuffer, pixelShader, setCallPixelShaderResource)
+FullscreenQuadRenderPipeline::FullscreenQuadRenderPipeline(const std::string& name, std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IPixelShader> pixelShader, const AdditionalSetCall& setCallPixelShaderResource, const FullscreenQuad& quad)
+	: RenderPipelineSRTWithImGuiComponents
+	  (
+	      name, 
+		  { "" },
+		  renderTarget, 
+		  nullptr,
+		  nullptr,
+		  cg::API::shared.graphics()->createRasterizer(),
+		  nullptr,
+		  {
+			  { cg::ShaderStage::vs, std::dynamic_pointer_cast<cg::IVertexShader>(cg::ShaderPool::shared.createFromFileAndAdd(cg::ShaderStage::vs, "FullscreenQuad.vsh", "FullscreenQuad.vsh", "vs_main", "vs_5_0")) },
+			  { cg::ShaderStage::ps, pixelShader }
+		  },
+		  nullptr,
+		  transformConstantBuffer, 
+		  lightConstantBuffer
+	  ),
+	  m_setCall
+	  (
+	      [=]()
+	      {
+	          renderTarget->set(nullptr);
+			  setCallPixelShaderResource();
+	      }
+	  ),
+	  m_drawCall
+	  (
+		  [=]()
+		  {
+			  quad->parts.at("main").getGeometryBuffer()->draw(quad->primitiveTopology, quad->instanceCount);
+		  }
+	  )
 {
-}
-FullscreenQuadRenderPipeline::FullscreenQuadRenderPipeline(const std::string& name, std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IPixelShader> pixelShader, const ShaderResourceSetCall& setCallPixelShaderResource)
-	: FullscreenQuadRenderPipeline(name, renderTarget, FullscreenQuad(), transformConstantBuffer, lightConstantBuffer, pixelShader, setCallPixelShaderResource)
-{
-}
-FullscreenQuadRenderPipeline::FullscreenQuadRenderPipeline(const std::string& name, std::shared_ptr<cg::IRenderTarget> renderTarget, const FullscreenQuad& quad, std::shared_ptr<cg::TransformConstantBuffer> transformConstantBuffer, std::shared_ptr<cg::LightConstantBuffer> lightConstantBuffer, std::shared_ptr<cg::IPixelShader> pixelShader, const ShaderResourceSetCall& setCallPixelShaderResource)
-	: RenderPipelineSRT(name, { "" }, renderTarget, nullptr, nullptr, transformConstantBuffer, lightConstantBuffer, nullptr,
-	  {
-		  { cg::ShaderStage::vs, std::dynamic_pointer_cast<cg::IVertexShader>(cg::ShaderPool::shared.createFromFileAndAdd(cg::ShaderStage::vs, "FullscreenQuad.vsh", "FullscreenQuad.vsh", "vs_main", "vs_5_0")) },
-		  { cg::ShaderStage::ps, pixelShader }
-	  }),
-	  m_additionalSetCall(setCallPixelShaderResource),
-	  m_quad(quad)
-{
-	m_rasterizer = cg::API::shared.graphics()->createRasterizer();
 }
 
 void FullscreenQuadRenderPipeline::render()
 {
-	auto setCall = [&]()
-	{
-		m_renderTarget->refresh();
-		m_renderTarget->set(nullptr);
-
-		m_additionalSetCall();
-	};
-	auto drawCall = [&]()
-	{
-		m_quad->parts.at("main").getGeometryBuffer()->draw(m_quad->primitiveTopology, m_quad->instanceCount);
-	};
-
-	renderDefault(setCall, drawCall);
+	accessToRenderTarget()->refresh();
+	renderDefault(m_setCall, m_drawCall);
 }
 
 void FullscreenQuadRenderPipeline::render(const cg::Scene& scene)
 {
-	auto setCall = [&](const cg::Scene& scene_)
-	{
-		m_renderTarget->refresh();
-		m_renderTarget->set(nullptr);
+	accessToRenderTarget()->refresh();
+	renderDefault(scene, false, [&](const cg::Scene&) { m_setCall(); }, m_drawCall);
+}
 
-		m_additionalSetCall();
-	};
-	auto drawCall = [&]()
-	{
-		m_quad->parts.at("main").getGeometryBuffer()->draw(m_quad->primitiveTopology, m_quad->instanceCount);
-	};
-
-	renderDefault(scene, setCall, drawCall, false);
+void FullscreenQuadRenderPipeline::drawImGuiComponents()
+{
 }

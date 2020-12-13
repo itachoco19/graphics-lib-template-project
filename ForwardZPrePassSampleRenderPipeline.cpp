@@ -5,7 +5,15 @@
 
 
 
-ForwardZPrePassSampleRenderPipeline::ForwardZPrePassSampleRenderPipeline(const std::string& name, std::shared_ptr<cg::IRenderTarget> renderTarget, std::shared_ptr<cg::IDepthStencilBuffer> depthStencilBuffer)
-	: ZPrePassForwardRendering(name, DepthPass(name, { std::make_shared<Position3Normal3DepthRenderPipeline>(cg::RasterizationBasedRenderPipeline::TargetRenderingGroupNameList{"SimpleShading"}) }), std::make_shared<ForwardSampleRenderPipeline>(renderTarget, depthStencilBuffer, cg::API::shared.graphics()->createDepthStencilTester(cg::ComparisonFunction::equal, cg::ComparisonFunction::always, true, false, true), false, false))
+const std::string ForwardZPrePassSampleRenderPipeline::targetRenderingGroupName = ForwardSampleRenderPipeline::targetRenderingGroupName;
+const cg::RasterizationBasedRenderPipeline::TargetRenderingGroupNameList targetRenderingGroupNameList = { ForwardZPrePassSampleRenderPipeline::targetRenderingGroupName };
+
+ForwardZPrePassSampleRenderPipeline::ForwardZPrePassSampleRenderPipeline(std::shared_ptr<ForwardRenderPipeline> forwardRenderPipeline)
+	: ForwardZPrePassRenderPipeline("Forward Z Pre-Pass Sample Render Pipeline", DepthPass("Depth Pass", { std::make_shared<Position3Normal3DepthRenderPipeline>(targetRenderingGroupNameList, forwardRenderPipeline->getDepthStencilBuffer()) }, forwardRenderPipeline->getDepthStencilBuffer(), false), forwardRenderPipeline)
+{
+}
+
+ForwardZPrePassSampleRenderPipeline::ForwardZPrePassSampleRenderPipeline(std::shared_ptr<cg::IRenderTarget> renderTarget)
+	: ForwardZPrePassSampleRenderPipeline(std::make_shared<ForwardSampleRenderPipeline>(renderTarget, cg::API::shared.graphics()->createDepthStencilTester(cg::ComparisonFunction::equal, cg::ComparisonFunction::always, true, false, false), true, false))
 {
 }

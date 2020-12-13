@@ -166,10 +166,10 @@
     <ClCompile Include="ImGuiCameraInspector.cpp" />
     <ClCompile Include="ConstantWithImGuiComponents.cpp" />
     <ClCompile Include="BoxWithImGuiComponents.cpp" />
-    <ClCompile Include="DefferedRenderingRenderPipeline.cpp" />
+    <ClCompile Include="DefferedRenderPipeline.cpp" />
     <ClCompile Include="ImGuiCameraControllerInspector.cpp" />
     <ClCompile Include="ImGuiDrawableObjectInspector.cpp" />
-    <ClCompile Include="ForwardRenderingRenderPipeline.cpp" />
+    <ClCompile Include="ForwardRenderPipeline.cpp" />
     <ClCompile Include="ImGuiCameraJumpButton.cpp" />
     <ClCompile Include="ImGuiSceneLightSearchBar.cpp" />
     <ClCompile Include="ImGuiDrawableObjectMaterialInspector.cpp" />
@@ -183,6 +183,8 @@
     <ClCompile Include="RenderPipelineWithImGuiComponents.cpp" />
     <ClCompile Include="ImGuiSceneInspector.cpp" />
     <ClCompile Include="ImGuiSceneDrawableObjectInspector.cpp" />
+    <ClCompile Include="SampleGBuffer.cpp" />
+    <ClCompile Include="SampleGeometryRenderPipeline.cpp" />
     <ClCompile Include="ShapeWithImGuiComponents.cpp" />
     <ClCompile Include="SimpleDirectionalLight.cpp" />
     <ClCompile Include="SimplePBRMaterialConstant.cpp" />
@@ -193,7 +195,7 @@
     <ClCompile Include="ObjectLookAtControl.cpp" />
     <ClCompile Include="ForwardSampleRenderPipeline.cpp" />
     <ClCompile Include="DepthPass.cpp" />
-    <ClCompile Include="ZPrePassForwardRendering.cpp" />
+    <ClCompile Include="ForwardZPrePassRenderPipeline.cpp" />
     <ClCompile Include="ForwardZPrePassSampleRenderPipeline.cpp" />
     <ClCompile Include="DepthRenderPipeline.cpp" />
     <ClCompile Include="FullscreenQuad.cpp" />
@@ -214,9 +216,9 @@
     <ClInclude Include="ObjectLookAtControl.hpp" />
     <ClInclude Include="ImGuiCameraInspector.hpp" />
     <ClInclude Include="ConstantWithImGuiComponents.hpp" />
-    <ClInclude Include="DefferedRenderingRenderPipeline.hpp" />
+    <ClInclude Include="DefferedRenderPipeline.hpp" />
     <ClInclude Include="ImGuiDrawableObjectInspector.hpp" />
-    <ClInclude Include="ForwardRenderingRenderPipeline.hpp" />
+    <ClInclude Include="ForwardRenderPipeline.hpp" />
     <ClInclude Include="IImGuiComponentsHolder.hpp" />
     <ClInclude Include="ImGuiCameraJumpButton.hpp" />
     <ClInclude Include="ImGuiCameraControllerInspector.hpp" />
@@ -230,6 +232,8 @@
     <ClInclude Include="RenderPipelineWithImGuiComponents.hpp" />
     <ClInclude Include="ImGuiSceneInspector.hpp" />
     <ClInclude Include="ImGuiSceneDrawableObjectInspector.hpp" />
+    <ClInclude Include="SampleGBuffer.hpp" />
+    <ClInclude Include="SampleGeometryRenderPipeline.hpp" />
     <ClInclude Include="ShapeWithImGuiComponents.hpp" />
     <ClInclude Include="SimpleDirectionalLight.hpp" />
     <ClInclude Include="SimplePBRMaterialConstant.hpp" />
@@ -244,7 +248,7 @@
     <ClInclude Include="FullscreenQuad.hpp" />
     <ClInclude Include="DrawableObjectCreator.hpp" />
     <ClInclude Include="FullscreenQuadRenderPipeline.hpp" />
-    <ClInclude Include="ZPrePassForwardRendering.hpp" />
+    <ClInclude Include="ForwardZPrePassRenderPipeline.hpp" />
     <ClInclude Include="FullscreenTextureRenderPipeline.hpp" />
     <ClInclude Include="ShaderConstant.h" />
     <ClInclude Include="ShaderConstant.hpp" />
