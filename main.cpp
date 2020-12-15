@@ -59,9 +59,9 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
 	}
 	catch (cpp::com_runtime_error e)
 	{
-		Log(e.message());
+		Log(e.message().c_str());
 	}
-
+	/*
 	// Prepare material
 	auto materialConstant = std::make_shared<SimplePBRMaterialConstant>();
 	materialConstant->changeIOR(1.35f);
@@ -94,16 +94,46 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
 	plane->moveTo(renderingGroupName);
 	sphere->moveTo(renderingGroupName);
 	box->moveTo(renderingGroupName);
+	*/
 
+	auto wallConstant = std::make_shared<SimplePBRMaterialConstant>();
+	wallConstant->changeIOR(1.5f);
+	wallConstant->changeMetalness(0.2f);
+	wallConstant->changeRoughness(1.0f);
 
+	auto groundConstant = std::make_shared<SimplePBRMaterialConstant>();
+	groundConstant->changeIOR(0.5f);
+	groundConstant->changeMetalness(0.01f);
+	groundConstant->changeRoughness(0.05f);
+
+	auto wallConstantDict = cg::Material::ConstantDict();
+	auto groundConstantDict = cg::Material::ConstantDict();
+	wallConstantDict.emplace(cg::ShaderStage::ps, wallConstant);
+	groundConstantDict.emplace(cg::ShaderStage::ps, groundConstant);
+	auto wallMaterial = cg::Material(wallConstantDict);
+	auto groundMaterial = cg::Material(groundConstantDict);
+
+	auto wallInstanceMaterial = wallMaterial.clone();
+	auto groundInstanceMaterial = groundMaterial.clone();
+
+	std::dynamic_pointer_cast<SimplePBRMaterialConstant>(wallInstanceMaterial.getConstantP(cg::ShaderStage::ps))->changeColor(1.0f, 0.8f, 1.0f);
+	std::dynamic_pointer_cast<SimplePBRMaterialConstant>(groundInstanceMaterial.getConstantP(cg::ShaderStage::ps))->changeColor(0.1f, 0.2f, 1.0f);
+
+	auto ground = DrawableObjectCreator::createBox<vsinput::Position3Normal3>("Ground", 5.0f, 0.1f, 5.0f, groundInstanceMaterial);
+	auto wall = DrawableObjectCreator::createBox<vsinput::Position3Normal3>("Wall", 1.0f, 2.0f, 1.0f, wallInstanceMaterial);
+
+	ground->getTransformRef().changePosition(0.0f, -0.05f, 0.0f);
+	wall->getTransformRef().changePosition(0.5f, 1.5f, 0.0f);
+	
+	ground->moveTo(renderingGroupName);
+	wall->moveTo(renderingGroupName);
 
 	// Setup Scene
 	auto scene = cg::Scene("World");
 
 	auto mainGroup = std::make_shared<cg::DrawableObjectGroup>("MainGroup");
-	mainGroup->add(sphere);
-	mainGroup->add(box);
-	mainGroup->add(plane);
+	mainGroup->add(ground);
+	mainGroup->add(wall);
 
 	scene.addObjectGroup(mainGroup);
 
